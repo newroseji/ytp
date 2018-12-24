@@ -71,3 +71,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Heroku
 
 This is a test project to see how we can implement CI/CD using Heroku and Laravel with Github
+
+## Getting Started with Laravel on Heroku
+[Getting Started with Laravel on Heroku](https://devcenter.heroku.com/articles/getting-started-with-laravel/)
