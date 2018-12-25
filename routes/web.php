@@ -20,6 +20,7 @@ Auth::routes(
 );
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/send/email', 'HomeController@mail')->name('email');
 Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::get('/about','AboutController@index')->name('about');

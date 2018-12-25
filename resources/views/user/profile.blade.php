@@ -14,10 +14,14 @@
                         </div>
                     @endif
 
+                    <a 
+                href="{{ url('send/email') }}" 
+                class="btn btn-primary btn-sm d-block">Send a test email</a>
+
                     {{ Auth::user()->name }}, you are logged in!
                 </div>
 
-                <div class="card-footer">This is a footer.</div>
+                
             </div>
         </div>
     </div>

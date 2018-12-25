@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\SendTestLog',
+        'App\Console\Commands\SendTestEmail',
     ];
 
     /**
@@ -24,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('test_log:create')
+                  ->everyFiveMinutes();
+
+        $schedule->command('email:send')
+                  ->everyTenMinutes();          
     }
 
     /**
