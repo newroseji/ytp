@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Cron;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\SendTestLog',
         'App\Console\Commands\SendTestEmail',
+        'App\Console\Commands\CronTest',
     ];
 
     /**
@@ -29,7 +31,11 @@ class Kernel extends ConsoleKernel
                   ->everyFiveMinutes();
 
         $schedule->command('email:send')
-                  ->everyTenMinutes();          
+                  ->everyTenMinutes();  
+        
+        $schedule->command('command:test')->everyMinute()->when(function () {
+                    return Cron::shouldIRun('command:test', 10); //returns true every 10 minutes
+        });
     }
 
     /**
