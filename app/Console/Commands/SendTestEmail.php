@@ -40,7 +40,7 @@ class SendTestEmail extends Command
     public function handle()
     {
         $name = 'Niraj Byanjankar';
-        Mail::to('newroseji@hotmail.com.com')->send(new TestSchMail($name));
+        Mail::to('nirajbjk@gmail.com')->send(new TestSchMail($name));
         
         \Log::info("Email was sent at " . date('m/d/Y h:i:s'));
     }
