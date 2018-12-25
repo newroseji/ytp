@@ -34,10 +34,10 @@ class HomeController extends Controller
         return view('user.profile');
     }
 
-    public function mail()
+    public function mail(Request $request)
     {
-        
-        $name = 'Niraj Byanjankar';
+        $params = $request->only(['txt_email']);
+        $name = $params['txt_email'];
         Mail::to('newroseji@hotmail.com.com')->send(new TestSchMail($name));
         
         return redirect('profile')->with('status', 'Email sent!');;   

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Profile</div>
+                <div class="card-header">Logged in Profile: {{ Auth::user()->name }} </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,11 +14,17 @@
                         </div>
                     @endif
 
-                    <a 
-                href="{{ url('send/email') }}" 
-                class="btn btn-primary btn-sm d-block">Send a test email</a>
+<form name="emailForm" role="form" method="POST" action="{{ url('send/email') }}">
+@csrf
+<label for="email">Email</label>
+<input type="email" id="email" name="txt_email" autofocus placeholder="Email address only">
 
-                    {{ Auth::user()->name }}, you are logged in!
+<input type="submit" value="Send a test email" class="btn btn-primary btn-sm d-inline">
+<input type="reset" value="Clear" class="btn btn-sm btn-danger btn-o">
+</form>
+                    
+
+                    
                 </div>
 
                 
