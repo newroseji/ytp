@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Menu;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,9 +17,11 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             
-        $categories = Menu::where('deleted',0)->get();
-            $view->with('categories', $categories);
+        $menus = Menu::where('deleted',0)->get();
+            $view->with('menus', $menus);
         });
+
+        View::share('global_key', '123');
     }
 
     /**

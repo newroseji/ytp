@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenusTable extends Migration
+class CreateAdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,25 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('ads', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('label');
-            $table->string('url');
+            $table->string('title');
+            $table->text('description');
             $table->string('category');
-            $table->string('description')->nullable();
-            $table->boolean('active')->default(0);
+            $table->double('price');
+
+            $table->integer('user_id')->unsighned();
+
             $table->boolean('deleted')->default(0);
+            $table->boolean('active')->default(1);
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
+            
+            //$table->timestamps();
         });
+
+        
     }
 
     /**
@@ -33,6 +41,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('ads');
+        
     }
 }

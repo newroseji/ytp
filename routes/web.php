@@ -21,6 +21,10 @@ Auth::routes(
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/send/email', 'HomeController@mail')->name('email');
-Route::get('/profile', 'HomeController@profile')->name('profile');
+
+Route::resource('/ads','AdController');
+Route::resource('/users','UserController');
 
 Route::get('/about','AboutController@index')->name('about');
+
+Route::post('/search','SearchController@search')->name('search');

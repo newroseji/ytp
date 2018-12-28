@@ -27,8 +27,8 @@ class MenusTableSeeder extends Seeder
             ]);   
         DB::table('menus')->insert(
             [
-            'label' => 'Tablets',
-            'url'=> '/tablets',
+            'label' => 'Ads',
+            'url'=> '/ads',
             'category' => 'sub',
             ]); 
         DB::table('menus')->insert(

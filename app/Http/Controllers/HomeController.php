@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
@@ -29,18 +30,14 @@ class HomeController extends Controller
         return view('user.home');
     }
 
-    public function profile(){
-
-        return view('user.profile');
-    }
-
     public function mail(Request $request)
     {
         $params = $request->only(['txt_email']);
         $name = $params['txt_email'];
         Mail::to('newroseji@hotmail.com.com')->send(new TestSchMail($name));
-        
-        return redirect('profile')->with('status', 'Email sent!');;   
+
+        return back()->with('status',"Email sent to $name!");
+           
        
     }
 }

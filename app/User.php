@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname','middlename','lastname','phone','mobile','street','area','city', 'email', 'password',
     ];
 
     /**
@@ -27,4 +27,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function ads()
+    {
+        return $this->hasMany('App\Ad');
+    }
+
 }
