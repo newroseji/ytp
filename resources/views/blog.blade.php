@@ -155,8 +155,3 @@
       </div><!-- /.row -->
 
       @endsection('content')
-
-    
-
-  </body>
-</html>

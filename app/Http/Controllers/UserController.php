@@ -7,6 +7,21 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
+    public function index(){
+        $user = \App\User::find(\Auth::user()->id);
+
+        
+        $ads = $user->ads()->paginate(5);
+        //dd($ads);
+      
+        return view('user.profile',compact('user','ads'));
+    }
+
     public function edit($id){
 
         $user = \App\User::find($id);
@@ -25,13 +40,11 @@ class UserController extends Controller
     {
         $user = \App\User::find($id);
 
-        $ads = $user->ads()->paginate(5);
-        //dd($ads);
+       
       
-        return view('user.profile',compact('user','ads'));
+        return view('user.show',compact('user'));
     }
-
-    
+ 
 
     /**
      * Update the specified resource in storage.

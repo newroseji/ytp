@@ -12,6 +12,6 @@ class AdsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Ad::class, 100)->create();
+        //factory(\App\Ad::class, 100)->create();
     }
 }

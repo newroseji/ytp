@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         
-                        <div class="collapse" id="collapseProfile">
+                        <div class="collapse show" id="collapseProfile">
                             <div class="card-body">
                             <table class="table table-responsive">
                                 <tr><th>Fullname</th><td>{{ $user->firstname . " " .  $user->middlename . " " . $user->lastname }}</td></tr>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         
-                        <div class="collapse" id="collapseAds">
+                        <div class="collapse show" id="collapseAds">
                             <div class="card-body">
                             @if($user->ads->count())
                             <div class="list-group">
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         
-                        <div class="collapse" id="collapseEmails">
+                        <div class="collapse show" id="collapseEmails">
                             <div class="card-body">
                                 <form name="emailForm" role="form" method="POST" action="{{ url('send/email') }}">
                                     <div class="card-body">
