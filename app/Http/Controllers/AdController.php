@@ -14,7 +14,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::paginate(5);
+        $ads = Ad::where(['deleted'=>0,'active'=>1])->orderBy('id','desc')->paginate(10);
         return view('ads.index', compact('ads'));
     }
 
@@ -42,7 +42,7 @@ class AdController extends Controller
             'title' => 'required|string|unique:ads',
 
             'description' => 'required|string',
-            'category' => 'required|string',
+            'category_id' => 'required',
 
             'price' => 'required|numeric'
 
@@ -52,13 +52,13 @@ class AdController extends Controller
             'title.unique' => 'Title already exists',
 
             'description.required' => 'Description is required',
-            'category.required' => 'Category is required',
+            
             'price.required' => 'Price is required',
 
         ]);
 
 
-        $input = request()->only(['title','description','category','price']);
+        $input = request()->only(['title','description','category','price','category_id']);
 
         
 
@@ -105,7 +105,43 @@ class AdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dump($request);
+        $request->validate([
+
+            'title' => 'required|string',
+            'user_id' => 'required',
+            'description' => 'required|string',
+            'category_id' => 'required',
+
+            'price' => 'required|numeric'
+
+        ], [
+
+            'title.required' => 'Title is required',
+            'title.unique' => 'Title already exists',
+
+            'description.required' => 'Description is required',
+            
+            'price.required' => 'Price is required',
+
+        ]);
+
+
+        $input = request()->only(['active','title','description','price','category_id','user_id']);
+
+        
+
+        //$input['user_id'] = \Auth::user()->id;
+
+        \Log::info($input);
+
+        $ad = Ad::updateOrCreate(['id'=>$id],$input);
+        $ad->save($input);
+
+        return redirect()->route('ads.show', ['id' => $ad->id])->with('status', "'$ad->title' updated!");
+
+
+        return back()->with('status','Ad updated!');
     }
 
     /**
@@ -117,7 +153,16 @@ class AdController extends Controller
     public function destroy($id)
     {
         $ad = Ad::find($id);
+
+        /* Hard delete
         $ad->delete();
+        */
+
+        /* Soft delete */
+        $ad->deleted=1;
+        $ad->save();
+
+
         return back()->with('status',"'$ad->title' deleted!");
     }
 }

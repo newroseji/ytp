@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,10 +14,11 @@ class UserController extends Controller
     }
 
     public function index(){
-        $user = \App\User::find(\Auth::user()->id);
+        //$user = User::where(['id'=> \Auth::user()->id, 'deleted'=>0,'active'=>1])->orderBy('id','desc')->get();
+        $user = User::find(\Auth::user()->id);
+        \Log::info($user);
 
-        
-        $ads = $user->ads()->paginate(5);
+        $ads = $user->ads()->paginate(10);
         //dd($ads);
       
         return view('user.profile',compact('user','ads'));
@@ -24,7 +26,7 @@ class UserController extends Controller
 
     public function edit($id){
 
-        $user = \App\User::find($id);
+        $user = User::find($id);
 
         return view('user.edit',compact('user'));
 
@@ -38,9 +40,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = \App\User::find($id);
-
-       
+        $user = User::find($id);
       
         return view('user.show',compact('user'));
     }
@@ -84,7 +84,7 @@ class UserController extends Controller
 
         \Log::info($input);
 
-        $user = \App\User::find($id);
+        $user = User::find($id);
         $user->updateOrCreate(['id'=>$id],$input);
 
         return back()->with('status','User profile updated!');

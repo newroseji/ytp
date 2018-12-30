@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,16 @@ class CreateAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ads', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('name');
             $table->text('description');
-           
-            $table->double('price');
-
-            $table->integer('user_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-
+            
             $table->boolean('deleted')->default(0);
-            $table->boolean('active')->default(1);
-
+            
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
-            
-            //$table->timestamps();
         });
-
-        
     }
 
     /**
@@ -42,7 +32,6 @@ class CreateAdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ads');
-        
+        Schema::dropIfExists('categories');
     }
 }

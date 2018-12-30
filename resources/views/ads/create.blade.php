@@ -31,9 +31,13 @@
 
                         <div class="form-group">
                             
-                            <textarea  cols="50" rows="5" class="form-control" id="description" name="description" required
-                            >Default text here
-                            </textarea>
+                            <textarea  
+                            cols="50" 
+                            rows="5" 
+                            class="form-control" 
+                            id="description" 
+                            name="description" required
+                            >Default text here</textarea>
                             @if($errors->has('description'))
                                     {!! $errors->first('description') !!} 
                                 @endif
@@ -41,11 +45,17 @@
 
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <input type="text" id="category" class="form-control" name="category" required
-                            placeholder="Category of the Ad">
-                            @if($errors->has('category'))
-                                    {!! $errors->first('category') !!} 
+                            <select class="form-control" name="category_id" id="category" required>
+                                <option value=""></option>
+                                @foreach($ad_categories as $cat)
+                                    <option value="{{$cat->id }}" >{!! $cat->name !!}
+                                @endforeach
+                            </select>
+
+                            @if($errors->has('category_id'))
+                                    {!! $errors->first('category_id') !!} 
                                 @endif
+                            
                         </div>
 
                         <div class="form-group">

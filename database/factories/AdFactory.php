@@ -6,8 +6,9 @@ $factory->define(App\Ad::class, function (Faker $faker) {
     return [
         'title'=>$faker->sentence,
         'description'=>$faker->paragraph,
-        'category'=>$faker->word,
-        'price'=>$faker->numberBetween(1000, 9000),
-        'user_id'=>1
+        
+        'price'=>mt_rand(1000, 9999)/ 10,
+        'user_id'=>mt_rand(1,3),
+        'category_id'=>mt_rand(1,10)
     ];
 });

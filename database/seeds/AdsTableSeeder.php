@@ -13,5 +13,17 @@ class AdsTableSeeder extends Seeder
     public function run()
     {
         //factory(\App\Ad::class, 100)->create();
+        /*
+        DB::table('ads')->insert(
+            [
+                'title' => 'Automobiles',
+                'description'=> 'Automobiles',
+                'price'=>mt_rand(1000, 9999),
+                'user_id'=>1,
+                'category_id'=>mt_rand(1,6)
+
+            ]);
+        */
+
     }
 }

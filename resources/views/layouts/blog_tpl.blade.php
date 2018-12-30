@@ -22,6 +22,7 @@
 <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 
 <link href="{{ asset('css/sticky-footer.css') }}" rel="stylesheet">
+@yield('ext_css')
   </head>
 
   <body>

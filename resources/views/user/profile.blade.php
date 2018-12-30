@@ -72,20 +72,43 @@
                         <div class="collapse show" id="collapseAds">
                             <div class="card-body">
                             @if($user->ads->count())
-                            <div class="list-group">
-                                @foreach($ads as $ad)
 
-                                    <a href="{{ route('ads.show',$ad->id )}}" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{$ad->title}}</h5>
-                                        <small class="text-muted">{{ $ad->created_at->diffForHumans() }}</small>
-                                        </div>
-                                        <p class="mb-1">{{ $ad->description}}</p>
-                                    </a>
-                                @endforeach
+                            <table class="table table-response table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Created at</th>
+                                        <th>Price</th>
+                                        <th>Active</th>
+                                        <th>Actions</th>
+                                    </tr>    
+                                </thead>
+                                <tbody>
+                                    @foreach($ads as $ad)
+                                        <tr class="{{ $ad->active ? '' : 'text-muted' }}">
+                                            <td>{{$ad->id}}</td>
+                                            <td><a href="{{ route('ads.show',$ad->id) }}">{{ $ad->title }}</a></td>
+                                            <td><a href="{{ route('categories.show',$ad->category_id)}}">{{ $ad->category->name }}</a></td>
+                                            <td>{{$ad->created_at}}</td>
+                                            <td>{{$ad->price ? 'Rs. ' . $ad->price : ''}}</td>
+                                            <td>
+                                            <div class="btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-outline-success">
+    <input name="active" type="checkbox" value="{{$ad->active}}}" />
+  </label>
+</div>
+                                            <span class="badge {{ $ad->active ? 'badge-success' : 'badge-danger' }}">{{ $ad->active ? 'Active' : 'Inactive' }}</span></td>
+                                            <td><a href="{{ route('ads.edit',$ad->id)}}" class="btn btn-primary btn-sm">edit</a>
+                                            <a href="#" class="btn btn-sm btn-danger">del</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                                {{ $ads->onEachSide(1)->links() }}
-                            </div>
+                            
                         @endif
                             </div>
                         </div>

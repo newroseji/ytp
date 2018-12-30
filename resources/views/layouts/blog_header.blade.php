@@ -45,7 +45,7 @@
             <ul class="nav navbar-nav navbar-right">
             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" 
-                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->firstname }} <span class="caret"></span>
                                 </a>
 
@@ -53,7 +53,7 @@
 
                                     
 
-                                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id ) }}">Profile</a>
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">Profile</a>
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -71,6 +71,7 @@
                                 </div>
                                 
                             </li>
+</ul>
                         @endguest
           </div>
 
