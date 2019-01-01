@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Ad;
+use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
@@ -27,7 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.home');
+        $user = User::find(\Auth::user()->id);
+        \Log::info($user);
+
+        $ads = $user->ads()->paginate(10);
+
+        return view('user.home',compact('user','ads'));
     }
 
     public function mail(Request $request)
@@ -39,5 +46,13 @@ class HomeController extends Controller
         return back()->with('status',"Email sent to $name!");
            
        
+    }
+
+    public function admin(){
+
+        $categories = Category::where('deleted',0)->get();
+        $users = User::where('deleted',0)->get();
+       
+        return view('admin.index',compact('categories','users'));
     }
 }

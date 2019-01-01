@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
 
@@ -14,14 +15,68 @@ class UserController extends Controller
     }
 
     public function index(){
-        //$user = User::where(['id'=> \Auth::user()->id, 'deleted'=>0,'active'=>1])->orderBy('id','desc')->get();
-        $user = User::find(\Auth::user()->id);
-        \Log::info($user);
+        $users = User::all();
 
-        $ads = $user->ads()->paginate(10);
-        //dd($ads);
+        return view('admin.users',compact('users'));
+    }
+
+    public function create(){
+
+        //dd('user create');
+        return view('user.create'); 
+    }
+
+    public function store(Request $request)
+    {
+
+       
+        $request->validate([
+
+            'firstname' => ['required', 'string', 'max:255'],
+            
+            'lastname' => ['required', 'string', 'max:255'],
+            'mobile' => ['required'],
+            'street' => ['required', 'string', 'max:255'],
+            'area' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+
+        ]);
+
+        
+
+
+        $input = request()->only([
+            'firstname',
+            'middlename',
+            'lastname',
+            'email',
+            'mobile',
+            'home',
+            'street',
+            'area',
+            'city',
+            'password'
+            ]);
+        
+        $input['password'] = bcrypt($input['password']);
+        $input['email_verified_at'] = date('Y-m-d h:i:s');
+
+        \Log::info($input);
+
+        $ad = new User();
+        $new_user=$ad->create($input);
+
+        \Log::info($new_user);
+
+        DB::table('users')->where('id',$new_user->id)->update(['email_verified_at'=>now()]);
       
-        return view('user.profile',compact('user','ads'));
+
+        return redirect()->route('users.show', ['id' => $new_user->id])->with('status', $input['firstname'] . " created!");
+
+
     }
 
     public function edit($id){

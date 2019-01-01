@@ -58,7 +58,7 @@ class AdController extends Controller
         ]);
 
 
-        $input = request()->only(['title','description','category','price','category_id']);
+        $input = request()->only(['title','description','price','category_id']);
 
         
 
@@ -67,8 +67,11 @@ class AdController extends Controller
         \Log::info($input);
 
         $ad = new Ad();
-        $ad->create($input);
-        return back()->with('status','Ad created!');
+        $new_ad=$ad->create($input);
+        \Log::info($new_ad);
+
+        return redirect()->route('ads.show', ['id' => $new_ad->id])->with('status', $input['title'] . " created!");
+
 
     }
 
@@ -140,8 +143,6 @@ class AdController extends Controller
 
         return redirect()->route('ads.show', ['id' => $ad->id])->with('status', "'$ad->title' updated!");
 
-
-        return back()->with('status','Ad updated!');
     }
 
     /**

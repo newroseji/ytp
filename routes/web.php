@@ -19,6 +19,7 @@ Auth::routes(
     ['verify' => true]
 );
 
+Route::get('/admin', 'HomeController@admin')->name('admin');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/send/email', 'HomeController@mail')->name('email');
 

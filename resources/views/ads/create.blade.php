@@ -69,6 +69,8 @@
 
                         <div class="d-block">
                             <input type="submit" value="Post" class="btn btn-primary">
+                            &nbsp;
+                            <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
                         </div>
                     </form>
 

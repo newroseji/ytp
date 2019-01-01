@@ -25,6 +25,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('testtest'),
 
             'remember_token' => str_random(10),
+            'admin'=>1
             ]);
 
             DB::table('users')->insert(

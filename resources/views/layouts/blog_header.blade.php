@@ -1,7 +1,13 @@
 <header class="blog-header py-3">
 <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1 d-none d-sm-block">
-            <a class="text-muted" href="/">{{ __('Home') }}</a>
+            
+                @if (Auth::user() && Auth::user()->admin)
+                    <a class="text-muted" href="/admin">{{ __('Admin') }}</a>
+                @else
+                    <a class="text-muted" href="{{ route('ads.create')}}">New Ad</a>
+                @endif
+           
           </div>
           <div class="col-4 text-center">
 
@@ -39,7 +45,7 @@
               <a class="btn btn-sm btn-outline-default" href="{{ route('login') }}">{{ __('Login') }}</a>
               
               @if (Route::has('register'))
-                <a class="btn btn-sm btn-outline-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <a class="btn btn-sm btn-outline-default" href="{{ route('register') }}">{{ __('Register') }}</a>
               @endif
             @else
             <ul class="nav navbar-nav navbar-right">
@@ -51,10 +57,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    
+                                    <a class="dropdown-item" href="{{ route('home') }}">Dashboard</a>
 
-                                    <a class="dropdown-item" href="{{ route('users.index') }}">Profile</a>
-                                    
+                                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -13,9 +13,9 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
 
-        //factory(\App\Category::class, 10)->create();
+        factory(\App\Category::class, 10)->create();
 
-        
+        /*
         DB::table('categories')->insert(
             [
                 'name' => 'Automobiles',
@@ -46,7 +46,7 @@ class CategoryTableSeeder extends Seeder
                                     'name' => 'Electronics',
                                     'description'=> 'Electronics'
                                 ]);
-        
+        */
 
     }
 }

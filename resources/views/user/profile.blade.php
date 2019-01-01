@@ -19,37 +19,6 @@
 
                     @endif
 
-                   <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex">
-                                <div class="mr-auto p-2"
-                                    data-toggle="collapse" 
-                                    data-target="#collapseProfile" 
-                                    aria-expanded="false" 
-                                    aria-controls="collapseProfile"
-                                    style="cursor:pointer">My Profile
-                                </div>
-                                <div class="p-2">
-                                        <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary btn-sm" 
-                                        >
-                                        Edit
-                                        </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="collapse show" id="collapseProfile">
-                            <div class="card-body">
-                            <table class="table table-responsive">
-                                <tr><th>Fullname</th><td>{{ $user->firstname . " " .  $user->middlename . " " . $user->lastname }}</td></tr>
-                                <tr><th>Email</th><td>{{$user->email}}</td></tr>
-                                <tr><th>Home Phone</th><td>{{$user->phone}}</td></tr>
-                                <tr><th>Mobile</th><td>{{ $user->mobile}}</td></tr>
-                                <tr><th>Address</th><td>{{$user->street . ' ' . $user->area . ' ' . $user->city}}</td></tr>
-                            </table>
-                            </div>
-                        </div>
-                   </div> 
 
                    <div class="card">
                         <div class="card-header">
@@ -94,12 +63,9 @@
                                             <td>{{$ad->created_at}}</td>
                                             <td>{{$ad->price ? 'Rs. ' . $ad->price : ''}}</td>
                                             <td>
-                                            <div class="btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-outline-success">
-    <input name="active" type="checkbox" value="{{$ad->active}}}" />
-  </label>
-</div>
-                                            <span class="badge {{ $ad->active ? 'badge-success' : 'badge-danger' }}">{{ $ad->active ? 'Active' : 'Inactive' }}</span></td>
+                                                <span class="badge {{ $ad->active ? 'badge-success' : 'badge-danger' }}">{{ $ad->active ? 'Active' : 'Inactive' }}</span>
+                                        </td>
+                                            
                                             <td><a href="{{ route('ads.edit',$ad->id)}}" class="btn btn-primary btn-sm">edit</a>
                                             <a href="#" class="btn btn-sm btn-danger">del</a>
                                             </td>

@@ -27,9 +27,14 @@
                                     data-target="#collapseProfile" 
                                     aria-expanded="false" 
                                     aria-controls="collapseProfile"
-                                    style="cursor:pointer">User Profile
+                                    style="cursor:pointer">
+                                    @if(Auth::user() && Auth::user()->id == $user->id)My
+                                    @else
+                                    User
+                                    @endif
+                                     Profile
                                 </div>
-                                @if(Auth::user()->id == $user->id)
+                                @if(Auth::user() && Auth::user()->id == $user->id)
                                     <div class="p-2">
                                             <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary btn-sm" 
                                             >

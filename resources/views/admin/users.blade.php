@@ -5,9 +5,12 @@
     <div class="row justify-content-center">
         <!-- <div class="col-md-12"> -->
             <div class="card">
-                <div class="card-header"><h5>All Categories</h5>
-                <p class="text-muted">Displaying {{$categories->count() }} out of {{$categories->total()}}</p>
-                
+                <div class="card-header">
+                    <div class="d-flex">
+                        <h5 class="p-2">All Users</h5>
+                        <a href="{{ route('users.create')}}" 
+                        class="btn btn-primary btn-sm ml-auto p-2">Create User</a>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -23,29 +26,33 @@
                         </div>
                     @endif
 
-                    @if($categories->count())
+                    @if($users->count())
                         <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            
-                        </tr>
+                        <th>ID</th>
+                        <th>Fullname</th>
+                        <th>Deleted</th>
 
-                        @foreach($categories as $category)
-                        <tr>
-                            <td>{{$category->id}}</td>
-                            <td>{{ $category->name }}</td>
-                            <td>{{ $category->description }}</td>
+                       
+                       
+                        <th>Actions</th></tr>
+
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{$user->id}}</td>
                             
-                        </tr>
+                                <td><a href="{{ route('users.show',$user->id)}}">{{$user->firstname . " " . $user->middlename . " " . $user->lastname}}</a></td>
+                                <td>
+                                {{$user->deleted}}
+                                </td>
+                            </tr>
                         
                             
                         @endforeach
                         </table>
                         
-                        {{ $categories->onEachSide(1)->links() }}
+                        
                     @endif
                     
                     

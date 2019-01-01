@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         
-        $categories = Category::paginate(5);
+        $categories = Category::where('deleted',0)->orderBy('updated_at','desc')->paginate(10);
 
         return view('categories.index',compact('categories'));
     }
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -38,7 +38,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'name' => 'required|string',
+            'description' => 'required|string'
+        ]);
+
+        $input = request()->only(['name','description']);
+        
+        $cat = new Category();
+        $new_cat=$cat->create($input);
+        \Log::info($new_cat);
+
+        return redirect()->route('categories.show', ['id' => $new_cat->id])->with('status', $input['name'] . " created!");
+
+
     }
 
     /**
@@ -49,7 +63,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show',compact('category'));
     }
 
     /**
@@ -60,7 +74,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+     
+        return view('categories.edit',compact('category'));
     }
 
     /**
@@ -72,7 +87,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        $request->validate([
+
+            'name' => 'required|string',
+            'description' => 'required|string'
+        ]);
+
+        $input = request()->only(['name','description']);
+        
+        $cat = Category::find($category->id);
+        $cat->name = $input['name'];
+        $cat->description = $input['description'];
+        $cat->save();
+
+        return back()->with('status','Category updated!');
+
     }
 
     /**
@@ -83,6 +113,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        \Log::info($category->id);
+        $cat = Category::find($category->id);
+        //$cat::updateOrCreate(['id'=>$id],$input);
+        $cat->deleted=1;
+        $cat->save();
+
+        return back()->with('status',"'$cat->name' updated!");
     }
 }

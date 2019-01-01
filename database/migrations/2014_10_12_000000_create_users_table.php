@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
+            $table->boolean('admin')->default(0);
+
             $table->boolean('deleted')->default(0);
             $table->boolean('active')->default(1);
 
