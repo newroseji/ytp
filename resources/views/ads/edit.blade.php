@@ -91,7 +91,8 @@
 
 
                         <div class="form-group">
-                        <input type="submit" class="form-control btn btn-primary btn-lg" value="Submit">
+                        <input type="submit" class="form-control btn btn-primary btn-lg" 
+                        value="Submit">
                         </div>
 
                         
@@ -99,11 +100,6 @@
                     </form>    
 
                 </div>
-
-                <div class="card-footer">
-                <a href="{{ URL::previous() }}" class="btn btn-info">Back</a>
-                </div>
-
 
             </div>
         </div>

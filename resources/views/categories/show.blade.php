@@ -1,5 +1,5 @@
 @extends('layouts.blog_tpl')
-
+@section('breadcrumbs', Breadcrumbs::render('categories.show',$category))
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -24,12 +24,13 @@
                     @if (Auth::user() && Auth::user()->admin )
                         
                                         <a href="{{ route('categories.edit',$category->id)}}" 
-                                        class="d-inline p-2 bg-primary text-white">Edit</a>
+                                        class="bg-primary text-white btn btn-sm"><i class="fa fa-pencil-square-o"></i> edit</a>
 
                                         <form action="{{ route('categories.destroy', $category->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="d-inline p-2 bg-danger text-white" type="submit">Del</button>
+                                            <button class="btn-sm bg-danger text-white" 
+                                            type="submit"><i class="fa fa-trash-o"></i> del</button>
                                         </form>
                         
                                     @endif
@@ -46,11 +47,6 @@
                     
 
                 </div>
-
-                <div class="card-footer">
-                <a href="{{ URL::previous() }}" class="btn btn-info">Back</a>
-                </div>
-
 
             </div>
         </div>

@@ -47,38 +47,37 @@
                         <div class="collapse show" id="collapseUsers">
                             <div class="card-body">
 
-                            @if($results['users'])
+                            @if($results['users'] &&  Auth::user())
 
-                            <table class="table table-striped">
-                            <caption style="caption-side:top">Users</caption>  
-                            <thead>
-                            
-                                <tr>
-                                    <th>Fullname</th>
-                                    <th>Email</th>
-                                    <th>Home</th>
-                                    <th>Mobile</th>
-                                    <th>Street</th>
-                                    <th>Area</th>
-                                    <th>City</th>
+                                <table class="table table-striped">
+                                <caption style="caption-side:top">Users</caption>  
+                                <thead>
+                                
+                                    <tr>
+                                        <th>Fullname</th>
+                                        <th>Email</th>
+                                        <th>Home</th>
+                                        <th>Mobile</th>
+                                        <th>Street</th>
+                                        <th>Area</th>
+                                        <th>City</th>
 
-                            
-                            </tr>
-</thead>
-<tbody>
-                                @foreach($results['users'] as $user)
-                                <tr>
-                                <td><a href="{{ route('users.show',$user->id)}}">{{$user->firstname . " " . $user->middlename . " " . $user->lastname}}</a></td>
-                                <td>{{ $user->email}}</td>
-                                <td>{{ $user->home}}</td>
-                                <td>{{ $user->mobile}}</td>
-                                <td>{{ $user->street}}</td>
-                                <td>{{ $user->area}}</td>
-                                <td>{{ $user->city}}</td>
-                            </tr>
-                                @endforeach
-                            </tbody>
-                            </table>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($results['users'] as $user)
+                                    <tr>
+                                    <td><a href="{{ route('users.show',$user->id)}}">{{$user->firstname . " " . $user->middlename . " " . $user->lastname}}</a></td>
+                                    <td>{{ $user->email}}</td>
+                                    <td>{{ $user->home}}</td>
+                                    <td>{{ $user->mobile}}</td>
+                                    <td>{{ $user->street}}</td>
+                                    <td>{{ $user->area}}</td>
+                                    <td>{{ $user->city}}</td>
+                                </tr>
+                                    @endforeach
+                                </tbody>
+                                </table>
                             @endif
 
                             @if($results['ads'])

@@ -51,12 +51,12 @@
                                 @if(Auth::user() )
                                     @if (Auth::user()->id == $ad->user_id)
                                         <a href="{{ route('ads.edit',$ad->id)}}" 
-                                        class="btn btn-primary btn-sm">Edit</a>
+                                        class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>
 
                                         <form action="{{ route('ads.destroy', $ad->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger btn-sm" type="submit">Del</button>
+                                            <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-o"></i></button>
                                         </form>
                                     @endif
                                 @endif

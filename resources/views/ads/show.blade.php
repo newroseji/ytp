@@ -48,12 +48,6 @@
                     
 
                 </div>
-
-                <div class="card-footer">
-                <a href="{{ URL::previous() }}" class="btn btn-info">Back</a>
-                </div>
-
-
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 @extends('layouts.blog_tpl')
-
+@section('breadcrumbs', Breadcrumbs::render('categories.index'))
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -30,6 +30,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Actions</th>
                             
                         </tr>
 
@@ -38,6 +39,21 @@
                             <td>{{$category->id}}</td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->description }}</td>
+                            <td>
+                            <div class="d-flex justify-content-around">
+                                
+                                        <a href="{{ route('categories.edit',$category->id)}}" 
+                                        class="btn btn-primary btn-sm">Edit</a>
+
+                                        <form action="{{ route('categories.destroy', $category->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="submit">Del</button>
+                                        </form>
+                                    
+
+                            </div>
+                            </td>
                             
                         </tr>
                         

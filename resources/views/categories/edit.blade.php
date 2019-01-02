@@ -1,5 +1,5 @@
 @extends('layouts.blog_tpl')
-
+@section('breadcrumbs', Breadcrumbs::render('categories.edit',$category))
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -58,7 +58,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
-                                <a href="{{ URL::previous() }}" class="btn btn-default">Cancel</a>
+                                
                             </div>
                         </div>
                     </form>
