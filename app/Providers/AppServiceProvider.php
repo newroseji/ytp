@@ -23,8 +23,11 @@ class AppServiceProvider extends ServiceProvider
 
         $ad_categories = Category::where('deleted',0)->get();
         $view->with('ad_categories',$ad_categories); 
+
+       
         });
 
+       
         View::share('global_key', '123');
     }
 

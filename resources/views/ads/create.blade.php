@@ -1,5 +1,5 @@
 @extends('layouts.blog_tpl')
-
+@section('breadcrumbs', Breadcrumbs::render('ads.create'))
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

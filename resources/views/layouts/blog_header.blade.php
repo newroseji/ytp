@@ -22,7 +22,8 @@
           <div class="input-group mb-3">
   
                 <input class="form-control form-control-sm form-control-borderless" 
-                        type="search" 
+                        type="search" autofocus
+                        minlength="2"
                         placeholder="Search topics or keywords" 
                         aria-label="Search topics or keywords" aria-describedby="basic-addon2"
                         name="q">
@@ -82,3 +83,4 @@
 
         </div>
         </header>
+        

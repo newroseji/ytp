@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('blog');
-});
+})->name('/');
 
 Auth::routes(
     ['verify' => true]

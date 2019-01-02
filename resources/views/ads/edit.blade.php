@@ -1,5 +1,5 @@
 @extends('layouts.blog_tpl')
-
+@section('breadcrumbs', Breadcrumbs::render('ads.edit', $ad) )
 @section('ext_css')
 <link href="{{ asset('css/bootstrap.v4/bs-switch.css') }}" rel="stylesheet">
 @endsection('ext_css')

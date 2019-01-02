@@ -31,6 +31,8 @@
       @include('layouts.blog_header')
 
       @include('layouts.blog_nav')
+      
+      @yield('breadcrumbs')
 
       @yield('jumbotron')
 

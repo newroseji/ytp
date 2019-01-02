@@ -66,12 +66,14 @@
                                         <a href="{{ route('users.edit',$user->id) }}" 
                                             class="btn btn-primary btn-sm">edit</a>
 
-                                        <form action="{{ route('users.destroy', $user->id)}}" 
-                                        method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm" type="submit">Del</button>
-                                        </form>
+                                        @if( Auth::user()->id !=$user->id)
+                                            <form action="{{ route('users.destroy', $user->id)}}" 
+                                            method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm" type="submit">Del</button>
+                                            </form>
+                                        @endif
 
                                     </td>
                                     </tr>

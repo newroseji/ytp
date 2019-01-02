@@ -130,3 +130,7 @@
   .blog-footer p:last-child {
     margin-bottom: 0;
   }
+
+  /* Highlight searched text. */
+  .highlight { background-color:#FFFF00; }
+  .highlight a { background-color:#FFFF00; }
