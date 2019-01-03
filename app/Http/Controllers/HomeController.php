@@ -51,7 +51,7 @@ class HomeController extends Controller
     public function admin(){
 
         $categories = Category::where('deleted',0)->get();
-        $users = User::where('deleted',0)->get();
+        $users = User::all();
        
         return view('admin.index',compact('categories','users'));
     }

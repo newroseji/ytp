@@ -30,7 +30,7 @@ Breadcrumbs::for('ads.edit', function ($trail, $ad) {
 // Categories
 Breadcrumbs::for('categories.index', function ($trail) {
     $trail->parent('home');
-    $trail->push('categories', route('categories.index'));
+    $trail->push('Categories', route('categories.index'));
 });
 
 // categories > New Category
@@ -49,4 +49,28 @@ Breadcrumbs::for('categories.show', function ($trail, $category) {
 Breadcrumbs::for('categories.edit', function ($trail, $category) {
     $trail->parent('categories.show', $category);
     $trail->push('Edit', route('categories.edit', $category->id));
+});
+
+// Users
+Breadcrumbs::for('users.index', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Users', route('users.index'));
+});
+
+// Users > New User
+Breadcrumbs::for('users.create', function ($trail) {
+    $trail->parent('users.index');
+    $trail->push('New User', route('users.create'));
+});
+
+// Users > [User Show]
+Breadcrumbs::for('users.show', function ($trail, $user) {
+    $trail->parent('users.index');
+    $trail->push($user->firstname . ' ' . $user->middlename . ' ' . $user->lastname, route('users.show', $user->id));
+});
+
+// Users > [User Edit] > Edit User
+Breadcrumbs::for('users.edit', function ($trail, $user) {
+    $trail->parent('users.show', $user);
+    $trail->push('Edit', route('users.edit', $user->id));
 });

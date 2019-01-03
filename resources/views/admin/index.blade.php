@@ -51,6 +51,7 @@
                                     <tr>
                                         <th>Fullname</th>
                                         <th>Email</th>
+                                        <th>Active</th>
                                         <th>Verified</th>
                                         <th>Created Date</th>
                                     </tr>
@@ -60,6 +61,7 @@
                                     <tr>
                                     <td><a href="{{ route('users.show',$user->id)}}">{{$user->firstname . " " . $user->middlename . " " . $user->lastname}}</a></td>
                                     <td>{{$user->email}}</td>
+                                    <td>{{$user->active}}</td>
                                     <td>{{$user->email_verified_at}}</td>
                                     <td>{{$user->created_at}}</td>
                                     <td>
