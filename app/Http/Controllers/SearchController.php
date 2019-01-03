@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Ad;
+use App\User;
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,17 @@ class SearchController extends Controller
     public function search(Request $request){
         //dd($request->only(['q']));
 
-        $input = $request->only(['q']);
+        try{
+            $input = $request->only(['q']);
+
+            if ( !isset($input['q']) || empty($input['q']) ){
+                return abort(404);
+            }
+            
+        }
+        catch(Exception $ex1){
+            return abort(404);
+        }
 
         $q = $input['q'];
 

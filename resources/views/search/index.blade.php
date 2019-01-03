@@ -20,7 +20,6 @@
                     @endif
 
                     <!-- Need a panel for all users -->
-
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex">
@@ -46,6 +45,12 @@
                         
                         <div class="collapse show" id="collapseUsers">
                             <div class="card-body">
+
+                            @if(count($results['users'])<=0 
+                            && count($results['ads'])<=0
+                            && count($results['categories'])<=0)
+                                Not found.
+                            @endif
 
                             @if($results['users'] &&  Auth::user())
 

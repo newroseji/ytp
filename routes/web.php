@@ -29,4 +29,5 @@ Route::resource('/users','UserController');
 
 Route::get('/about','AboutController@index')->name('about');
 
+Route::get('/search','SearchController@search')->name('search.get');
 Route::post('/search','SearchController@search')->name('search');

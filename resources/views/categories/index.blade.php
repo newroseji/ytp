@@ -41,6 +41,8 @@
                             <td>{{ $category->description }}</td>
                             <td>
                             <div class="d-flex justify-content-around">
+                                @if(Auth::user() )
+                                    @if (Auth::user()->id == $ad->user_id)
                                 
                                         <a href="{{ route('categories.edit',$category->id)}}" 
                                         class="btn btn-primary btn-sm">Edit</a>
@@ -50,6 +52,8 @@
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="submit">Del</button>
                                         </form>
+                                    @endif
+                                @endif
                                     
 
                             </div>
