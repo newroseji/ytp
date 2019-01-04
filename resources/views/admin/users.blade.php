@@ -6,6 +6,19 @@
         <!-- <div class="col-md-12"> -->
             <div class="card">
                 <div class="card-header">
+                    @if (session('status'))
+                        
+                        <div class="alert alert-success alert-dismissible fade show" 
+                        role="alert">
+                            {{ session('status') }}
+                            <button type="button" 
+                            class="close" 
+                            data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                    @endif
                     <div class="d-flex">
                         <h5 class="p-2">All Users</h5>
                         <a href="{{ route('users.create')}}" 
@@ -14,17 +27,7 @@
                 </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success alert-dismissible fade show" 
-                            role="alert">
-                            {{ session('status') }}
-                            <button type="button" 
-                            class="close" 
-                            data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
+                    
 
                     @if($users->count())
                         <table class="table table-bordered">

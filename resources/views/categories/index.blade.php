@@ -5,15 +5,10 @@
     <div class="row justify-content-center">
         <!-- <div class="col-md-12"> -->
             <div class="card">
-                <div class="card-header"><h5>All Categories</h5>
-                <p class="text-muted">Displaying {{$categories->count() }} out of {{$categories->total()}}</p>
-                
-                </div>
-
-                <div class="card-body">
-                    @if (session('status'))
+                @if (session('status'))
+                        
                         <div class="alert alert-success alert-dismissible fade show" 
-                            role="alert">
+                        role="alert">
                             {{ session('status') }}
                             <button type="button" 
                             class="close" 
@@ -21,7 +16,15 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                     @endif
+                <div class="card-header"><h5>All Categories</h5>
+                <p class="text-muted">Displaying {{$categories->count() }} out of {{$categories->total()}}</p>
+                
+                </div>
+
+                <div class="card-body">
+                    
 
                     @if($categories->count())
                         <table class="table table-bordered">
@@ -41,8 +44,8 @@
                             <td>{{ $category->description }}</td>
                             <td>
                             <div class="d-flex justify-content-around">
-                                @if(Auth::user() )
-                                    @if (Auth::user()->id == $ad->user_id)
+                                @if(Auth::user() && Auth::user()->admin)
+                                   
                                 
                                         <a href="{{ route('categories.edit',$category->id)}}" 
                                         class="btn btn-primary btn-sm">Edit</a>
@@ -52,7 +55,7 @@
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm" type="submit">Del</button>
                                         </form>
-                                    @endif
+                                  
                                 @endif
                                     
 

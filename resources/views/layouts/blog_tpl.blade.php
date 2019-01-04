@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Yestopo is a special platform where you can find all sort of merchandise that you can use for your daily life. We try to update with the latest and greatest items that you deserve.">
     <meta name="author" content="Niraj Byanjankar">
-    <link rel="canonical" href="http://www.yestopo.com" />
+    <link rel="canonical" href="http://www.yestopo.com/{{Request::segment(1)}}" />
     <link rel="icon" href="{{ asset('img/favicon.ico') }}">
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">

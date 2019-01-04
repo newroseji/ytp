@@ -43,7 +43,7 @@
                             <div class="card-body">
                             @if($user->ads->count())
 
-                            <table class="table table-response table-bordered">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -52,7 +52,7 @@
                                         <th>Created at</th>
                                         <th>Price</th>
                                         <th>Active</th>
-                                        <th>Actions</th>
+                                        <th>&nbsp;</th>
                                     </tr>    
                                 </thead>
                                 <tbody>
