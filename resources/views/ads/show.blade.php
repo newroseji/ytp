@@ -44,7 +44,7 @@
 
                    
 
-                    <p>{!! $ad->description !!}
+                    <p>{!! $ad->description !!}</p>
                     
 
                 </div>

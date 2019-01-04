@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <meta name="description" content="Yestopo is a special platform where you can find all sort of merchandise that you can use for your daily life. We try to update with the latest and greatest items that you deserve.">
+    <meta name="author" content="Niraj Byanjankar">
+    <link rel="canonical" href="http://www.yestopo.com" />
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}">
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -38,10 +39,10 @@
 
       @yield('featured_posts')
     </div>
-      <main role="main" class="container">
+      <div role="main" class="container p-0">
         @yield('content')
 
-      </main><!-- /.container -->
+      </div><!-- /.container -->
 
     
       <footer class="footer">

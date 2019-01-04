@@ -33,33 +33,34 @@ class MenusTableSeeder extends Seeder
             ]); 
         DB::table('menus')->insert(
             [
-            'label' => 'Auto',
-            'url'=> '/auto',
+            'label' => 'Matrimony',
+            'url'=> '/matrimony',
             'category' => 'sub',
             ]);    
         DB::table('menus')->insert(
             [
-            'label' => 'Desktops',
-            'url'=> '/desktops',
+            'label' => 'Rent',
+            'url'=> '/rent',
             'category' => 'sub',
             ]); 
+        
         DB::table('menus')->insert(
             [
-            'label' => 'Laptops',
-            'url'=> '/laptops',
+            'label' => 'Jobs',
+            'url'=> '/jobs',
             'category' => 'sub',
-            ]);
+            ]); 
         DB::table('menus')->insert(
             [
             'label' => 'Apparels',
             'url'=> '/apparels',
             'category' => 'sub',
-            ]); 
+            ]);  
         DB::table('menus')->insert(
             [
-            'label' => 'Real Estates',
-            'url'=> '/realestates',
+            'label' => 'Referrals',
+            'url'=> '/referrals',
             'category' => 'sub',
-            ]);             
+            ]);           
     }
 }

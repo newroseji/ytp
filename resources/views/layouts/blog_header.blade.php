@@ -1,90 +1,85 @@
-<header class="blog-header py-3">
-<div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1 d-none d-sm-block">
-            
-                @if (Auth::user() && Auth::user()->admin)
-                    <a class="text-muted" href="/admin">{{ __('Admin') }}</a>
-                @else
-                    <a class="text-muted" href="{{ route('ads.create')}}">New Ad</a>
-                @endif
-           
-          </div>
-          <div class="col-4 text-center">
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
 
-          <a class="blog-header-logo text-dark" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-            
-          </div>
-          <div class="col-4 d-flex justify-content-between">
-          <form method="POST" action="{{ route('search') }}">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2" aria-controls="navbar2" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="d-inline">
+    <a href="{{ url('/') }}" title="{{ config('app.name', 'Laravel') }}">
+<img src="{{ asset('img/logos/market.png') }}" style="width:50px;height:50px" />
+</a>
+  <a class="navbar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'Laravel') }}">
+    {{ config('app.name', 'Laravel') }}
+  </a>
+</div>
+  <div class="collapse navbar-collapse justify-content-end" id="navbar2">
+
+    <form method="POST" action="{{ route('search') }}"
+    style="display:flex;flex:1"
+    >
+      @csrf
+      <div class="input-group">
+        <input class="form-control  mr-sm-1" autofocus
+        name="q" title="Search here" 
+        type="text" placeholder="Search">
+        <div class="input-group-append">
+          <span class="input-group-button">
+            <button type="submit" title="Search" class="btn btn-outline-light text-light my-2 my-sm-0"><i class="fa fa-search"></i></button></span>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-inline">
+      @guest
+      <ul class="nav navbar-nav navbar-right">
+        <li class=nav-item">
+          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+        </li>
+        <li class="nav-item">
+          @if (Route::has('register'))
+          <a class="btn btn-sm nav-link btn-outline-default pr-0" href="{{ route('register') }}">{{ __('Register') }}</a>
+          @endif
+        </li>
+      </ul>
+
+      @else
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item ml-2">
+          <a href="#" class="nav-link">
+          <i class="fa fa-bell-o" title="Notification"></i>
+        </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" 
+          role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user-circle-o"></i> {{ Auth::user()->firstname . ' ' . Auth::user()->middlename . ' ' . Auth::user()->lastname }} <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+          <a class="dropdown-item" href="{{ route('home') }}">
+            <i class="fa fa-tachometer"></i> Dashboard</a>
+
+            <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">
+              <i class="fa fa-user-o"></i> Profile</a>
+              <a class="dropdown-item" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
+              <i class="fa fa-sign-out"></i> {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" 
+            method="POST" 
+            style="display: none;"
+            >
             @csrf
-          <div class="input-group mb-3">
-  
-                <input class="form-control form-control-sm form-control-borderless" 
-                        type="search" autofocus
-                        minlength="2"
-                        placeholder="Search topics or keywords" 
-                        aria-label="Search topics or keywords" aria-describedby="basic-addon2"
-                        name="q">
-
-                <div class="input-group-append">
-                    <button class="btn btn-success btn-sm" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                                        width="20" height="20" 
-                                        viewBox="0 0 24 24" 
-                                        fill="none" stroke="currentColor" 
-                                        stroke-width="2" stroke-linecap="round" 
-                                        stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-                                        
-                    </button>
-                </div>
-            </div>
-            </form>
-            
-
-            <!-- Authentication Links -->
-            @guest
-              <a class="btn btn-sm btn-outline-default" href="{{ route('login') }}">{{ __('Login') }}</a>
-              
-              @if (Route::has('register'))
-                <a class="btn btn-sm btn-outline-default" href="{{ route('register') }}">{{ __('Register') }}</a>
-              @endif
-            @else
-            <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" 
-                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-user-circle-o"></i> {{ Auth::user()->firstname }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                        <i class="fa fa-tachometer"></i> Dashboard</a>
-
-                                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">
-                                    <i class="fa fa-user-o"></i> Profile</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out"></i> {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" 
-                                        method="POST" 
-                                        style="display: none;"
-                                    >
-                                        @csrf
-                                    </form>
-                                    
-                                </div>
-                                
-                            </li>
-</ul>
-                        @endguest
-          </div>
+          </form>
 
         </div>
-        </header>
-        
+
+      </li>
+    </ul>
+    @endguest
+  </div>
+</div>
+</nav>

@@ -2,15 +2,19 @@
 @section('breadcrumbs', Breadcrumbs::render('ads.index'))
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="justify-content-center">
         <!-- <div class="col-md-12"> -->
             <div class="card">
                 <div class="card-header">
+                    
                     <div class="d-flex">
+
                         <h5 class="p-2">All Ads</h5>
+
                         <a href="{{ route('ads.create')}}" 
-                        class="btn btn-primary btn-sm ml-auto p-2">New Ad</a>
+                        class="btn btn-primary btn-sm ml-auto p-2"><i class="fa fa-newspaper-o"></i> New Ad</a>
                     </div>
+
                     <p class="text-muted">Displaying {{$ads->count() }} out of {{$ads->total()}}</p>
                 
                 </div>

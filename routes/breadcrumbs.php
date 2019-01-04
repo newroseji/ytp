@@ -74,3 +74,9 @@ Breadcrumbs::for('users.edit', function ($trail, $user) {
     $trail->parent('users.show', $user);
     $trail->push('Edit', route('users.edit', $user->id));
 });
+
+// Dashboard
+Breadcrumbs::for('dashboard', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Dashboard', route('home'));
+});

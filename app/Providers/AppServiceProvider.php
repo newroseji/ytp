@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Menu;
 use App\Category;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
 
        
         View::share('global_key', '123');
+
+        Schema::defaultStringLength(191);
     }
 
     /**
