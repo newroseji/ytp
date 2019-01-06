@@ -43,7 +43,7 @@
                             <div class="card-body">
                             @if($user->ads->count())
 
-                            <table class="table table-striped">
+                            <table class="table table-striped table-responsive">
                                 <thead>
                                     <tr>
                                         <th>ID</th>

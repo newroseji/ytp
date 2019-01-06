@@ -27,7 +27,7 @@
                     
 
                     @if($categories->count())
-                        <table class="table table-bordered">
+                        <table class="table table-striped table-responsive">
                         <thead>
                         <tr>
                             <th>ID</th>

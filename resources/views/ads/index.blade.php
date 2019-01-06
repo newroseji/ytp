@@ -39,7 +39,7 @@
 
 
         @if($ads->count())
-        <table class="table table-striped">
+        <table class="table table-striped table-responsive table-hover">
             <thead>
                 <tr>
                     <th>ID</th>

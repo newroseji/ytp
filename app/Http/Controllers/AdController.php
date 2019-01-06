@@ -14,7 +14,11 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::where(['deleted'=>0,'active'=>1])->orderBy('id','desc')->paginate(10);
+        $ads = Ad::where(['deleted'=>0,'active'=>1])
+        ->orderBy('updated_at','desc')
+        ->orderBy('created_at','desc')
+
+        ->paginate(10);
         return view('ads.index', compact('ads'));
     }
 
