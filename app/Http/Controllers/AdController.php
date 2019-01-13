@@ -165,6 +165,7 @@ class AdController extends Controller
 
         /* Soft delete */
         $ad->deleted=1;
+        $ad->updated_at=now();
         $ad->save();
 
 

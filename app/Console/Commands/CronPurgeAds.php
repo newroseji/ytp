@@ -49,9 +49,10 @@ class CronPurgeAds extends Command
             //\Log::info($purged);
 
             
-            Mail::to('nirajbjk@gmail.com')->send(new EmailPurged($deleted_ads));
+            Mail::to('nirajbjk@gmail.com')
+            ->send(new EmailPurged($deleted_ads));
             
-            \Log::info(count($deleted_ads) . " ads deleted at " . date('m/d/Y h:i:s'));
+            \Log::info(count($deleted_ads) . " ads purged at " . date('m/d/Y h:i:s'));
         }
 
     }
