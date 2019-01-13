@@ -156,6 +156,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $user = User::find($id);
+
+        $user->deleted=1;
+        $user->active=0;
+        $user->save();
+
+        return back()->with('status',"'$user->firstname' deleted!");
+
     }
 }

@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
                 'city'=>'Lalitpur',
                 'email'=> 'jane.doe@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('test1234'),
+                'password' => bcrypt('testtest'),
     
                 'remember_token' => str_random(10),
                 ]);
@@ -53,7 +53,23 @@ class UsersTableSeeder extends Seeder
                     'city'=>'Kathmandu',
                     'email'=> 'john.doe@gmail.com',
                     'email_verified_at' => now(),
-                    'password' => bcrypt('test1234'),
+                    'password' => bcrypt('testtest'),
+        
+                    'remember_token' => str_random(10),
+                    ]);
+
+                DB::table('users')->insert(
+                    [
+                    'firstname' => 'Robin',
+                    'lastname'=>'Sribasky',
+                    'mobile'=>'9841000111',
+                    'street'=>'Lagankhel',
+                    'area'=>'Patan',
+                    'city'=>'Lalitpur',
+                    'email'=> 'robins@gmail.com',
+                    'email_verified_at' => now(),
+                    'password' => bcrypt('testtest'),
+                    'deleted'=>1,
         
                     'remember_token' => str_random(10),
                     ]);
