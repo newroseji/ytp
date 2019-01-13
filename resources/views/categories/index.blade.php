@@ -27,39 +27,39 @@
                     
 
                     @if($categories->count())
-                        <table class="table table-striped table-responsive">
+                        <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
                             <th>Description</th>
-                            <th>Actions</th>
-                            
                         </tr>
 
                         @foreach($categories as $category)
                         <tr>
                             <td>{{$category->id}}</td>
                             <td>{{ $category->name }}</td>
-                            <td>{{ $category->description }}</td>
                             <td>
-                            <div class="d-flex justify-content-around">
-                                @if(Auth::user() && Auth::user()->admin)
-                                   
-                                
-                                        <a href="{{ route('categories.edit',$category->id)}}" 
-                                        class="btn btn-primary btn-sm">Edit</a>
-
-                                        <form action="{{ route('categories.destroy', $category->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm" type="submit">Del</button>
-                                        </form>
-                                  
-                                @endif
+                                <div class="d-flex justify-content-between"> 
+                                    {{ $category->description }}&nbsp;
                                     
+                                        @if(Auth::user() && Auth::user()->admin)
+                                           <div class="d-flex justify-content-around h-25">
+                                        
+                                                <a href="{{ route('categories.edit',$category->id)}}" 
+                                                class="btn btn-primary btn-sm">Edit</a>&nbsp;
 
-                            </div>
+                                                <form action="{{ route('categories.destroy', $category->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger btn-sm" type="submit">Del</button>
+                                                </form>
+                                            </div>
+                                        @endif
+
+                                        
+
+                                </div>
                             </td>
                             
                         </tr>

@@ -48,7 +48,7 @@ class CategoryController extends Controller
         
         $cat = new Category();
         $new_cat=$cat->create($input);
-        \Log::info($new_cat);
+        //\Log::info($new_cat);
 
         return redirect()->route('categories.show', ['id' => $new_cat->id])->with('status', $input['name'] . " created!");
 
@@ -113,7 +113,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        \Log::info($category->id);
+        //\Log::info($category->id);
         $cat = Category::find($category->id);
         //$cat::updateOrCreate(['id'=>$id],$input);
         $cat->deleted=1;

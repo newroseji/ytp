@@ -22,28 +22,28 @@
 
                 <div class="card-header">
 
-                    <div class="d-flex">
-                        <div class="p-2">{{ $category->name }}</div>
+                    <h3>{{ $category->name }}</h3>
                         
-                       
-                    </div>
-                    <span class="text-muted">{{ $category->created_at->diffForHumans() }}</span>
-                    
-                    @if (Auth::user() && Auth::user()->admin )
-                        
+                        <hr class="pb-0 mb-1">
+                        <div class="pb-0 mb-0 d-flex justify-content-between">
+                            <span>
+                                <i class="fa fa-calendar"></i> Created on {{ $category->created_at->format('M d, Y \a\t h:i A') }}
+                            </span>
+                            
+                            @if (Auth::user() && Auth::user()->admin )
+                                <span class="d-flex justify-content-around">
                                         <a href="{{ route('categories.edit',$category->id)}}" 
-                                        class="bg-primary text-white btn btn-sm"><i class="fa fa-pencil-square-o"></i> edit</a>
+                                        class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i> edit</a>&nbsp;
 
                                         <form action="{{ route('categories.destroy', $category->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn-sm bg-danger text-white" 
+                                            <button class="btn btn-sm btn-danger" 
                                             type="submit"><i class="fa fa-trash-o"></i> del</button>
                                         </form>
-                        
-                                    @endif
-                    
-
+                                </span>
+                            @endif
+                        </div>
                     
                 </div>
 

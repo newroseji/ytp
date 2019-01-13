@@ -68,11 +68,11 @@ class AdController extends Controller
 
         $input['user_id'] = \Auth::user()->id;
 
-        \Log::info($input);
+        //\Log::info($input);
 
         $ad = new Ad();
         $new_ad=$ad->create($input);
-        \Log::info($new_ad);
+        //\Log::info($new_ad);
 
         return redirect()->route('ads.show', ['id' => $new_ad->id])->with('status', $input['title'] . " created!");
 
@@ -140,7 +140,7 @@ class AdController extends Controller
 
         //$input['user_id'] = \Auth::user()->id;
 
-        \Log::info($input);
+        //\Log::info($input);
 
         $ad = Ad::updateOrCreate(['id'=>$id],$input);
         $ad->save($input);

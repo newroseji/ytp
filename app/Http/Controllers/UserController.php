@@ -64,12 +64,12 @@ class UserController extends Controller
         $input['password'] = bcrypt($input['password']);
         $input['email_verified_at'] = date('Y-m-d h:i:s');
 
-        \Log::info($input);
+        //\Log::info($input);
 
         $ad = new User();
         $new_user=$ad->create($input);
 
-        \Log::info($new_user);
+        //\Log::info($new_user);
 
         DB::table('users')->where('id',$new_user->id)->update(['email_verified_at'=>now()]);
       
@@ -110,7 +110,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        \Log::info($id);
+        //\Log::info($id);
         
         $request->validate([
             'firstname' => 'required|string',
@@ -137,7 +137,7 @@ class UserController extends Controller
                 'city'
             ]);
 
-        \Log::info($input);
+        //\Log::info($input);
 
         $user = User::find($id);
         $user->updateOrCreate(['id'=>$id],$input);

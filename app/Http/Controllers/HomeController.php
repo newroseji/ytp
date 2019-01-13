@@ -30,9 +30,11 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::find(\Auth::user()->id);
-        \Log::info($user);
+        //\Log::info($user);
 
-        $ads = $user->ads()->paginate(10);
+        $ads = Ad::where(['user_id'=>$user->id,'deleted'=>0])->paginate(10);
+
+        //$ads = $user->ads()->paginate(10);
 
         return view('user.home',compact('user','ads'));
     }

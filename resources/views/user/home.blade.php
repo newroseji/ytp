@@ -43,7 +43,7 @@
                             <div class="card-body">
                             @if($user->ads->count())
 
-                            <table class="table table-striped table-responsive">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -52,7 +52,6 @@
                                         <th>Created at</th>
                                         <th>Price</th>
                                         <th>Active</th>
-                                        <th>&nbsp;</th>
                                     </tr>    
                                 </thead>
                                 <tbody>
@@ -64,11 +63,26 @@
                                             <td>{{$ad->created_at}}</td>
                                             <td>{{$ad->price ? 'Rs. ' . $ad->price : ''}}</td>
                                             <td>
-                                                <span class="badge {{ $ad->active ? 'badge-success' : 'badge-danger' }}">{{ $ad->active ? 'Active' : 'Inactive' }}</span>
-                                        </td>
-                                            
-                                            <td><a href="{{ route('ads.edit',$ad->id)}}" class="btn btn-primary btn-sm">edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger">del</a>
+
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span class="h-25 badge {{ $ad->active ? 'badge-success' : 'badge-danger' }}">{{ $ad->active ? 'Active' : 'Inactive' }}</span>
+                                          
+                                                    @if(Auth::user() )
+                                                        <span class="d-flex justify-content-end">
+                                                            @if (Auth::user()->id == $ad->user_id || Auth::user()->admin )
+                                                                <a href="{{ route('ads.edit',$ad->id)}}" 
+                                                                    class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+                                                                <form action="{{ route('ads.destroy', $ad->id)}}" method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-o"></i></button>
+                                                                </form>
+                                                            @endif
+                                                        </span>
+                                                    @endif
+
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach
