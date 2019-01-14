@@ -55,6 +55,10 @@ class HomeController extends Controller
 
     public function admin(){
 
+        if ( !\Auth::user()->admin){
+            return redirect()->route('/')->with('status', "Not authorized!");
+        }
+
         $categories = Category::where('deleted',0)->get();
         $users = User::all();
        

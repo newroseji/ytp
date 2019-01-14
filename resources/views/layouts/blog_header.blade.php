@@ -21,6 +21,7 @@
       <div class="input-group">
         <input class="form-control  mr-sm-1" autofocus
         name="q" title="Search here" 
+        required="required" 
         type="text" placeholder="Search">
         <div class="input-group-append">
           <span class="input-group-button">
@@ -49,6 +50,15 @@
           <i class="fa fa-bell-o" title="Notification"></i>
         </a>
         </li>
+
+        @if( Auth::user()->admin)
+        <li class="nav-item ml-2">
+          <a href="{{ route('admin')}}" class="nav-link">
+          <i class="fa fa-user-o" title="Tools"></i>
+        </a>
+        </li>
+        @endif
+
         <li class="nav-item dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" 
           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

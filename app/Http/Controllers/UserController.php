@@ -17,12 +17,15 @@ class UserController extends Controller
     public function index(){
         $users = User::all();
 
+        if ( !\Auth::user()->admin){
+            return redirect()->route('/')->with('status', "Not authorized!");
+        }
+
         return view('admin.users',compact('users'));
     }
 
     public function create(){
 
-        //dd('user create');
         return view('user.create'); 
     }
 

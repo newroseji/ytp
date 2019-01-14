@@ -77,7 +77,7 @@
                                                 <div class="d-flex justify-content-between">
 
                                                     <span>
-                                                        {{ $user->created_at->format('m/d/Y h:i A') }}
+                                                        {{ $user->created_at }}
                                                     </span>&nbsp;
 
                                                     @if (Auth::user() && (Auth::user()->id ==$user->id || Auth::user()->admin) )

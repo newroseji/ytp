@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Ad;
+use App\Mail\EmailNormalizedAds;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class CronNormalizeAds extends Command
 {
@@ -44,17 +46,18 @@ class CronNormalizeAds extends Command
 
         $ids = "('" . implode("','" ,$ads) . "')";
 
-
-        //\Log::info($ids);
+        \Log::info($ids);
 
         $ad = Ad::whereRaw("id in " . $ids)->update(['active'=>0]);
 
+        if ($ad){
+
+            Mail::to('nirajbjk@gmail.com')
+            ->send(new EmailNormalizedAds($ads));
+
+            \Log::Info('Expired ads converted to inactive ads.');
+        }
         
-
-
-        //\Log::info($ad);
-
-        \Log::Info('Expired ads converted to inactive ads.');
     }
 
     private function expiredAds(){

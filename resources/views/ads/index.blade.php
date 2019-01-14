@@ -56,7 +56,7 @@
                 <tbody>
 
                     @foreach($ads as $ad)
-                    <tr class="{{ Auth::user()->id == $ad->user_id  ? 'table-success' : '' }}">
+                    <tr class="{{ Auth::user() && Auth::user()->id == $ad->user_id  ? 'table-success' : '' }}">
                        
                         <td><a href="{{ route('ads.show',$ad->id) }}">{{ $ad->title }}</a></td>
                         <td><a href="{{ route('categories.show',$ad->category_id)}}" class="badge badge-pill badge-info">{{ $ad->category->name }}</a></td>
