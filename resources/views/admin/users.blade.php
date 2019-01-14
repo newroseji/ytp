@@ -54,7 +54,7 @@
                                                     
                                                     <span class="h-25 badge {{ $user->deleted ? 'badge-danger' : 'badge-success' }}">{{ $user->deleted ? 'Deleted' : '' }}</span>
 
-                                                    <span class="h-25 badge {{ $user->active ? $user->deleted ? 'badge-warning' : 'badge-success' : 'badge-danger' }}">{{ $user->active ? 'Active' : 'Inactive' }}</span>
+                                                    <span class="h-25 badge {{ $user->active ? $user->deleted ? 'badge-info' : 'badge-success' : 'badge-warning' }}">{{ $user->active ? 'Active' : 'Inactive' }}</span>
 
                                                 </div>
 

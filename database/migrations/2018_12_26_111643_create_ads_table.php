@@ -26,6 +26,9 @@ class CreateAdsTable extends Migration
             $table->boolean('deleted')->default(0);
             $table->boolean('active')->default(1);
 
+            $table->timestamp('expires')->nullable();
+            $table->timestamp('publish')->nullable();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             

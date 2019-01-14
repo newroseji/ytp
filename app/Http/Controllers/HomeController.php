@@ -32,7 +32,10 @@ class HomeController extends Controller
         $user = User::find(\Auth::user()->id);
         //\Log::info($user);
 
-        $ads = Ad::where(['user_id'=>$user->id,'deleted'=>0])->paginate(10);
+        $ads = Ad::where(['user_id'=>$user->id])
+        ->orderBy('expires','desc')
+        ->orderBy('publish','desc')
+        ->paginate(5);
 
         //$ads = $user->ads()->paginate(10);
 

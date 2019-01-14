@@ -31,7 +31,8 @@
 
                         </p>
                         <hr class="pb-0 mb-1">
-                        <p class="pb-0 mb-0"><i class="fa fa-calendar"></i> Posted on {{ $ad->created_at->format('M d, Y \a\t h:i A') }}
+                        <p class="pb-0 mb-0"><i class="fa fa-calendar"></i> Published on {{ $ad->publish }}
+                            <br/><i class="fa fa-calendar"></i> Expires at {{ $ad->expires }}
                             @if (Auth::user() && Auth::user()->id == $ad->user_id)
 
                                 <div class="float-right">
@@ -61,7 +62,7 @@
 
 
 
-                                <p>{!! $ad->description !!}</p>
+                                <p><img data-src="holder.js/200x250?theme=thumb"  class="rounded float-right pl-2" alt="...">{!! $ad->description !!}</p>
 
 
                 </div>

@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         //'App\Console\Commands\SendTestEmail',
         'App\Console\Commands\CronTest',
         'App\Console\Commands\CronPurgeAds',
+        'App\Console\Commands\CronNormalizeAds',
     ];
 
     /**

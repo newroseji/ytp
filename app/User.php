@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,6 +32,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function ads()
     {
         return $this->hasMany('App\Ad');
+    }
+
+    public function getEmailVerifiedAtAttribute($value)
+    {
+        $date = Carbon::parse($value);
+        return $date->format('m/d/Y h:i A');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        $date = Carbon::parse($value);
+        return $date->format('m/d/Y h:i A');
     }
     
 

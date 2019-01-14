@@ -67,7 +67,7 @@
                                                     
                                                     <span class="h-25 badge {{ $user->deleted ? 'badge-danger' : 'badge-success' }}">{{ $user->deleted ? 'Deleted' : '' }}</span>
 
-                                                    <span class="h-25 badge {{ $user->active ? $user->deleted ? 'badge-warning' : 'badge-success' : 'badge-danger' }}">{{ $user->active ? 'Active' : 'Inactive' }}</span>
+                                                    <span class="h-25 badge {{ $user->active ? $user->deleted ? 'badge-info' : 'badge-success' : 'badge-warning' }}">{{ $user->active ? 'Active' : 'Inactive' }}</span>
 
                                                 </div>
 
@@ -77,7 +77,7 @@
                                                 <div class="d-flex justify-content-between">
 
                                                     <span>
-                                                        {{$user->created_at}}
+                                                        {{ $user->created_at->format('m/d/Y h:i A') }}
                                                     </span>&nbsp;
 
                                                     @if (Auth::user() && (Auth::user()->id ==$user->id || Auth::user()->admin) )

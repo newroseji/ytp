@@ -42,28 +42,31 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    
                     <th>Title</th>
                     <th>Category</th>
 
                     <th>Price</th>
+                    <th>Expires</th>
                     <th>Seller</th>
+
                     
                 </tr>
                 </thead>
                 <tbody>
 
                     @foreach($ads as $ad)
-                    <tr>
-                        <td>{{$ad->id}}</td>
+                    <tr class="{{ Auth::user()->id == $ad->user_id  ? 'table-success' : '' }}">
+                       
                         <td><a href="{{ route('ads.show',$ad->id) }}">{{ $ad->title }}</a></td>
-                        <td><a href="{{ route('categories.show',$ad->category_id)}}">{{ $ad->category->name }}</a></td>
+                        <td><a href="{{ route('categories.show',$ad->category_id)}}" class="badge badge-pill badge-info">{{ $ad->category->name }}</a></td>
                         <td>{{ $ad->price ? 'Rs. ' . number_format($ad->price, 2) : '' }}</td>
+                        <td>{{ $ad->expires  }}</td>
                         <td>
-                            <div class="d-flex justify-content-around">
-                                <a href="{{ route('users.show',$ad->user_id)}}">{{$ad->user->firstname . " " . $ad->user->middlename . " " . $ad->user->lastname}}</a>
+                            <div class="d-flex justify-content-start">
+                                <a href="{{ route('users.show',$ad->user_id)}}">{{$ad->user->firstname . " " . $ad->user->middlename . " " . $ad->user->lastname}}</a>&nbsp;
 
-                                <span  class="d-flex justify-content-around">
+                                <span  class="d-flex justify-content-around h-25">
 
                                     @if(Auth::user() )
                                         @if (Auth::user()->id == $ad->user_id || Auth::user()->admin )
@@ -90,6 +93,9 @@
                     </table>
 
                     {{ $ads->onEachSide(1)->links() }}
+
+                    @else
+                        <p><span class="badge badge-danger">No Ads found</span></p>
                     @endif
 
 

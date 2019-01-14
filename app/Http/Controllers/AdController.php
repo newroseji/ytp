@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdController extends Controller
@@ -15,6 +16,7 @@ class AdController extends Controller
     public function index()
     {
         $ads = Ad::where(['deleted'=>0,'active'=>1])
+        ->where('expires','>=',now())
         ->orderBy('updated_at','desc')
         ->orderBy('created_at','desc')
 
@@ -48,7 +50,10 @@ class AdController extends Controller
             'description' => 'required|string',
             'category_id' => 'required',
 
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+
+            'expires' => 'required|date|after_or_equal:publish',
+            'publish' => 'required|date',
 
         ], [
 
@@ -62,7 +67,10 @@ class AdController extends Controller
         ]);
 
 
-        $input = request()->only(['title','description','price','category_id']);
+        $input = request()->only(['title','description','price','category_id','publish','expires']);
+
+        $input['publish'] = Carbon::parse($input['publish']);
+        $input['expires'] = Carbon::parse($input['expires']);
 
         
 
@@ -134,13 +142,16 @@ class AdController extends Controller
         ]);
 
 
-        $input = request()->only(['active','title','description','price','category_id','user_id']);
+        $input = request()->only(['active','title','description','price','category_id','user_id','publish','expires']);
 
         
 
         //$input['user_id'] = \Auth::user()->id;
 
-        //\Log::info($input);
+        \Log::info($input);
+
+        $input['publish'] = Carbon::parse($input['publish']);
+        $input['expires'] = Carbon::parse($input['expires']);
 
         $ad = Ad::updateOrCreate(['id'=>$id],$input);
         $ad->save($input);

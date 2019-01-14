@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Ad extends Model
@@ -9,7 +10,7 @@ class Ad extends Model
     protected $table = 'ads';
 
     protected $fillable = [
-        'title','description','category_id','price','user_id','active'
+        'title','description','category_id','price','user_id','active','publish','expires'
     ];
 
     public function user()
@@ -21,4 +22,22 @@ class Ad extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    public function getExpiresAttribute($value)
+    {
+        $date = Carbon::parse($value);
+        return $date->format('m/d/Y h:i A');
+    }
+
+    public function getPublishAttribute($value)
+    {
+        $date = Carbon::parse($value);
+        return $date->format('m/d/Y h:i A');
+    }
+
+    
+
+    
+
+
 }

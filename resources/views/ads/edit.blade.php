@@ -2,6 +2,10 @@
 @section('breadcrumbs', Breadcrumbs::render('ads.edit', $ad) )
 @section('ext_css')
 <link href="{{ asset('css/bootstrap.v4/bs-switch.css') }}" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
 @endsection('ext_css')
 
 @section('content')
@@ -94,7 +98,43 @@
                             <input type="text" name ="price" id ="price" class="form-control" value="{{ $ad->price }}">
                             @if($errors->has('price'))
                                     {!! $errors->first('price') !!} 
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="datetimepicker1">Expires</label>
+                            
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input type="text" name="expires" required class="form-control datetimepicker-input" 
+                                 value="{{ $ad->expires }}"
+                                data-target="#datetimepicker1"/>
+
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+
+                                @if($errors->has('expires'))
+                                    {!! $errors->first('expires') !!} 
                                 @endif
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="publish">Publish</label>
+                            
+                            <div class="input-group date" id="publish" data-target-input="nearest">
+                                <input type="text" name="publish" required class="form-control datetimepicker-input" 
+                                value="{{ $ad->publish }}"
+                                data-target="#publish"/>
+                                <div class="input-group-append" data-target="#publish" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                                @if($errors->has('publish'))
+                                    {!! $errors->first('publish') !!} 
+                                @endif
+                            </div>
+
                         </div>
 
 
@@ -114,3 +154,16 @@
     </div>
 </div>
 @endsection
+
+@section('ext_js')
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+
+@endsection('ext_js')
