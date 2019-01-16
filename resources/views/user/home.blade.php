@@ -5,19 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-        @if (session('status'))
-                        
-                        <div class="alert alert-success alert-dismissible fade show" 
-                        role="alert">
-                            {{ session('status') }}
-                            <button type="button" 
-                            class="close" 
-                            data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                    @endif
+        
 
 
                    <div class="card">
@@ -78,7 +66,7 @@
 
                                                         &nbsp;
                                               
-                                                        @if(Auth::user() )
+                                                        @if(Auth::user() && !$ad->deleted)
                                                             <span class="d-flex justify-content-end">
                                                                 @if (Auth::user()->id == $ad->user_id || Auth::user()->admin )
                                                                     <a href="{{ route('ads.edit',$ad->id)}}" 
