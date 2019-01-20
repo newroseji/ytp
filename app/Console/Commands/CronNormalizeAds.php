@@ -48,7 +48,7 @@ class CronNormalizeAds extends Command
 
         \Log::info($ids);
 
-        $ad = Ad::whereRaw("id in " . $ids)->update(['active'=>0]);
+        $ad = Ad::whereRaw("id in " . $ids)->update(['deleted'=>1]);
 
         if ($ad){
 
@@ -62,7 +62,7 @@ class CronNormalizeAds extends Command
 
     private function expiredAds(){
         return Ad::where('expires','<',now())
-        ->where('active',1)
+        ->where('deleted',0)
         ->get()
         ->toArray();
 

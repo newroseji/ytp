@@ -24,7 +24,7 @@ class CreateAdsTable extends Migration
             $table->integer('category_id')->unsigned();
 
             $table->boolean('deleted')->default(0);
-            $table->boolean('active')->default(1);
+            //$table->boolean('active')->default(1);
 
             $table->timestamp('expires')->nullable();
             $table->timestamp('publish')->nullable();

@@ -49,8 +49,8 @@
                             
                         <!-- Need Active switch -->
                         <div class="form-group">
-                            <label for="active">Active</label>
-                            <input type="text" id="active" name="active" class="form-control" value="{{ $ad->active}}">
+                            <label for="deleted">Active</label>
+                            <input type="text" id="deleted" name="deleted" class="form-control" value="{{ $ad->deleted}}">
                         </div>
 
                        

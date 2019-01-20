@@ -21,7 +21,12 @@
                         <hr class="pb-0 mb-1">
                         <p class="pb-0 mb-0"><i class="fa fa-calendar"></i> Published on {{ $ad->publish }}
                             <br/><i class="fa fa-calendar"></i> Expires at {{ $ad->expires }}
+
                             @if (Auth::user() && Auth::user()->id == $ad->user_id)
+
+                                @if(App\Ad::expired($ad->id)->count()>0)
+                                        <span class="badge badge-pill badge-warning">expired</span>
+                                @endif
 
                                 <div class="float-right">
                                     <a href="{{ route('ads.edit',$ad->id)}}" 

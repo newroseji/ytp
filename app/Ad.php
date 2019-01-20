@@ -10,7 +10,7 @@ class Ad extends Model
     protected $table = 'ads';
 
     protected $fillable = [
-        'title','description','category_id','price','user_id','active','publish','expires'
+        'title','description','category_id','price','user_id','publish','expires'
     ];
 
     public function user()
@@ -35,9 +35,51 @@ class Ad extends Model
         return $date->format('m/d/Y h:i A');
     }
 
-    
+    public function scopeErased($query,$user_id=null){
+        if($user_id==null){
+            return $query->where('deleted', 1);
+        }
+        else{
+            return $query->where('deleted', 1)->where('user_id',$user_id);
+        }
+    }
 
-    
+    public function scopeNotErased($query,$user_id=null){
+
+        if($user_id==null){
+            
+            return $query->where('deleted', 0);
+        }
+        else{
+            return $query->where('deleted', 0)->where('user_id',$user_id);
+        }
+    }
+
+    public function scopeExpired($query,$ad_id=null,$user_id=null){
+        
+     
+
+        if($user_id!=null){
+            \Log::info('reading this 1');
+            
+            return $query
+            ->where('expires','<',now())
+            ->where('user_id',$user_id);
+        }
+        elseif($ad_id!=null){
+            \Log::info('reading this 2');
+            return $query
+            ->where('expires','<',now())
+            ->where('id',$ad_id);
+        }
+        else{
+            \Log::info('reading this 3');
+            return $query
+            ->where('expires','<',now());
+        }
+        
+
+    }
 
 
 }

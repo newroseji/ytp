@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'firstname','middlename','lastname','phone','mobile','street','area','city', 'email', 'password',
+        'firstname','middlename','lastname','phone','mobile','street','area','city', 'email', 'password','deleted'
     ];
 
     /**
@@ -42,8 +42,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getCreatedAtAttribute($value)
     {
-        $date = Carbon::parse($value);
-        return $date->format('m/d/Y h:i A');
+        return Carbon::parse($value)->format('m/d/Y h:i A');       
+    }
+
+    public function scopeErased($query){
+        return $query->where('deleted', 1);
+     }
+
+    public function scopeNotErased($query){
+        return $query->where('deleted', 0);
     }
     
 

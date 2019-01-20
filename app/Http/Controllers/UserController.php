@@ -15,6 +15,7 @@ class UserController extends Controller
     }
 
     public function index(){
+
         $users = User::all();
 
         if ( !\Auth::user()->admin){
@@ -32,7 +33,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-       
+
         $request->validate([
 
             'firstname' => ['required', 'string', 'max:255'],
@@ -62,7 +63,7 @@ class UserController extends Controller
             'area',
             'city',
             'password'
-            ]);
+        ]);
         
         $input['password'] = bcrypt($input['password']);
         $input['email_verified_at'] = date('Y-m-d h:i:s');
@@ -75,7 +76,7 @@ class UserController extends Controller
         //\Log::info($new_user);
 
         DB::table('users')->where('id',$new_user->id)->update(['email_verified_at'=>now()]);
-      
+
 
         return redirect()->route('users.show', ['id' => $new_user->id])->with('status', $input['firstname'] . " created!");
 
@@ -89,7 +90,7 @@ class UserController extends Controller
         return view('user.edit',compact('user'));
 
     }
-   
+
     /**
      * Display the specified resource.
      *
@@ -99,10 +100,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-      
+
         return view('user.show',compact('user'));
     }
- 
+
 
     /**
      * Update the specified resource in storage.
@@ -114,7 +115,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //\Log::info($id);
-        
+
         $request->validate([
             'firstname' => 'required|string',
             'middlename' => 'nullable|string',
@@ -124,7 +125,8 @@ class UserController extends Controller
             'mobile' => 'required|string',
             'street' => 'required|string',
             'area' => 'required|string',
-            'city' => 'required|string'
+            'city' => 'required|string',
+
         ]);
 
 
@@ -140,7 +142,7 @@ class UserController extends Controller
                 'city'
             ]);
 
-        //\Log::info($input);
+        \Log::info($input);
 
         $user = User::find($id);
         $user->updateOrCreate(['id'=>$id],$input);
@@ -161,12 +163,27 @@ class UserController extends Controller
     {
 
         $user = User::find($id);
+        $delete=false;
 
-        $user->deleted=1;
-        $user->active=0;
+        if($user->deleted){
+            $user->deleted=0;
+            $delete=false;
+        }
+        else{
+            $user->deleted=1;
+            $delete=true;
+        }
+
         $user->save();
 
-        return back()->with('status',"'$user->firstname' deleted!");
+        \Log::info($user->deleted);
+
+        return back()->with(
+            [
+                'status'=>"User '$user->firstname $user->lastname' " . ($delete ? ' deleted!' : ' restored!'),
+                'type'=>($delete ? 'error' : 'success')
+        ]
+        );
 
     }
 }

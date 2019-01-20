@@ -59,9 +59,11 @@ class HomeController extends Controller
             return redirect()->route('/')->with('status', "Not authorized!");
         }
 
-        $categories = Category::where('deleted',0)->get();
+        $categories = Category::all();
         $users = User::all();
+
+        $ads = Ad::paginate(10);
        
-        return view('admin.index',compact('categories','users'));
+        return view('admin.index',compact('categories','users','ads'));
     }
 }

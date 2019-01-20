@@ -8,18 +8,33 @@
                 
                 <div class="card-header">
 
-                    <div class="d-flex flex-column bd-highlight mb-0">
-                        <div class="p-2 bd-highlight">
-                            <h5 class="float-left">All Ads</h5>
+                   
 
-                            <a href="{{ route('ads.create')}}" 
-                            class="btn btn-primary btn-sm float-right"><i class="fa fa-newspaper-o"></i> New Ad</a>
+
+<div class="d-flex bd-highlight mb-3">
+                            <div class="mr-auto p-2 bd-highlight"
+                            data-toggle="collapse" 
+                            data-target="#collapseAds" 
+                            aria-expanded="false" 
+                            aria-controls="collapseAds"
+                            style="cursor:pointer"
+                            ><h5>All Ads</h5></div>
+                            
+                            <div class="p-2 bd-highlight">
+                                <span class="btn btn-sm btn-warning">displaying
+                                    <span class="badge badge-pill badge-success">{{ $ads->count() }}</span>
+                                    out of 
+                                    <span class="badge badge-pill badge-primary">{{ $ads->total() }}</span>
+                                </span>
+                            </div>
+                            
+                                <div class="p-2 bd-highlight"><a href="{{ route('ads.create') }}" class="btn btn-primary btn-sm" 
+                                    >
+                                    Add new Ad
+                                </a>
+                            </div>
                         </div>
-                        <div class="p-2 mb-0 bd-highlight">
-                          <p class="text-muted">Displaying {{$ads->count() }} out of {{$ads->total()}}</p>
-                      </div>
-                      
-                  </div>
+
 
               </div>
 

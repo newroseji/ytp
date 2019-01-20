@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    
+/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+public function __construct()
+{
+    $this->middleware(['auth', 'verified']);
+}
     /**
      * Display a listing of the resource.
      *
@@ -74,7 +84,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-     
+       
         return view('categories.edit',compact('category'));
     }
 
@@ -115,10 +125,21 @@ class CategoryController extends Controller
     {
         //\Log::info($category->id);
         $cat = Category::find($category->id);
-        //$cat::updateOrCreate(['id'=>$id],$input);
-        $cat->deleted=1;
+
+        $delete=false;
+
+        if($cat->deleted){
+            $cat->deleted=0;
+            $delete=false;
+        }
+        else{
+            $cat->deleted=1;
+            $delete=true;
+        }
+
+        
         $cat->save();
 
-        return back()->with('status',"'$cat->name' updated!");
+        return back()->with(['status'=>"Category '$cat->name' " . ($delete ? ' deleted!' : ' restored!'),'type'=>($delete ? 'error' : 'success')]);
     }
 }

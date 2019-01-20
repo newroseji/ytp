@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class AdController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified'], ['except' => ['index','create','show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +26,13 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::where(['deleted'=>0,'active'=>1])
+        $ads = Ad::where(['deleted'=>0])
         ->where('expires','>=',now())
         ->orderBy('updated_at','desc')
         ->orderBy('created_at','desc')
 
         ->paginate(10);
+
         return view('ads.index', compact('ads'));
     }
 
@@ -42,7 +54,7 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $request->validate([
 
             'title' => 'required|string|unique:ads',
@@ -142,7 +154,7 @@ class AdController extends Controller
         ]);
 
 
-        $input = request()->only(['active','title','description','price','category_id','user_id','publish','expires']);
+        $input = request()->only(['title','description','price','category_id','user_id','publish','expires']);
 
         
 
@@ -170,16 +182,29 @@ class AdController extends Controller
     {
         $ad = Ad::find($id);
 
+        $delete=false;
+
+        if($ad->deleted){
+            $ad->deleted=0;
+            $delete=false;
+        }
+        else{
+            $ad->deleted=1;
+            $delete=true;
+        }
+
         /* Hard delete
         $ad->delete();
         */
 
         /* Soft delete */
-        $ad->deleted=1;
+        
         $ad->updated_at=now();
         $ad->save();
 
 
-        return back()->with('status',"'$ad->title' deleted!");
+        return back()->with(
+            ['status'=>"Ad '$ad->title' " . ($delete ? ' deleted!' : ' restored!'),'type'=>($delete ? 'error' : 'success')]
+        );
     }
 }

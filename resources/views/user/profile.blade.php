@@ -42,14 +42,14 @@
                 </thead>
                 <tbody>
                     @foreach($ads as $ad)
-                    <tr class="{{ $ad->active ? '' : 'text-muted' }}">
+                    <tr class="{{ $ad->deleted ? 'text-muted' : '' }}">
                         <td>{{$ad->id}}</td>
                         <td><a href="{{ route('ads.show',$ad->id) }}">{{ $ad->title }}</a></td>
                         <td><a href="{{ route('categories.show',$ad->category_id)}}">{{ $ad->category->name }}</a></td>
                         <td>{{$ad->created_at}}</td>
                         <td>{{$ad->price ? 'Rs. ' . $ad->price : ''}}</td>
                         <td>
-                            <span class="badge {{ $ad->active ? 'badge-success' : 'badge-danger' }}">{{ $ad->active ? 'Active' : 'Inactive' }}</span>
+                            <span class="badge {{ $ad->deleted ?  'badge-danger' : 'badge-success'  }}">{{ $ad->deleted ? 'Inactive' : 'Active' }}</span>
                         </td>
                         
                         <td><a href="{{ route('ads.edit',$ad->id)}}" class="btn btn-primary btn-sm">edit</a>
