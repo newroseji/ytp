@@ -57,23 +57,22 @@ class Ad extends Model
 
     public function scopeExpired($query,$ad_id=null,$user_id=null){
         
-     
-
+    
         if($user_id!=null){
-            \Log::info('reading this 1');
+           
             
             return $query
             ->where('expires','<',now())
             ->where('user_id',$user_id);
         }
         elseif($ad_id!=null){
-            \Log::info('reading this 2');
+          
             return $query
             ->where('expires','<',now())
             ->where('id',$ad_id);
         }
         else{
-            \Log::info('reading this 3');
+          
             return $query
             ->where('expires','<',now());
         }

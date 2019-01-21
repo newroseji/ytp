@@ -160,7 +160,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
-                                <a href="{{ URL::previous() }}" class="btn btn-default">Cancel</a>
+                                
                             </div>
                         </div>
                     </form>

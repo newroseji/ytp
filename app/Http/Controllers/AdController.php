@@ -30,7 +30,6 @@ class AdController extends Controller
         ->where('expires','>=',now())
         ->orderBy('updated_at','desc')
         ->orderBy('created_at','desc')
-
         ->paginate(10);
 
         return view('ads.index', compact('ads'));
@@ -160,7 +159,7 @@ class AdController extends Controller
 
         //$input['user_id'] = \Auth::user()->id;
 
-        \Log::info($input);
+        //\Log::info($input);
 
         $input['publish'] = Carbon::parse($input['publish']);
         $input['expires'] = Carbon::parse($input['expires']);

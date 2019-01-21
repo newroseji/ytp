@@ -8,7 +8,7 @@
 
 
 
-         <div class="card">
+           <div class="card">
             <div class="card-header">
 
 
@@ -22,8 +22,8 @@
                     ><h5>My Ads</h5></div>
                     <div class="p-2 bd-highlight">
                         <span class="btn btn-sm btn-warning">expired
-                                <span class="badge badge-pill badge-light">{{ App\Ad::expired(null,$user->id)->count() }}</span>
-                            </span>
+                            <span class="badge badge-pill badge-light">{{ App\Ad::expired(null,$user->id)->count() }}</span>
+                        </span>
                     </div>
                     <div class="p-2 bd-highlight">
                         <span class="btn btn-sm btn-danger">deleted 
@@ -34,8 +34,8 @@
                             </span>
 
                             <span class="btn btn-sm btn-info">total
-                                    <span class="badge badge-pill badge-light">{{ $user->ads->count() }}</span>
-                                </span>
+                                <span class="badge badge-pill badge-light">{{ $user->ads->count() }}</span>
+                            </span>
 
                             
 
@@ -81,13 +81,14 @@
                                 <td>{{$ad->publish}}</td>
                                 <td>
 
-                                    <div class="d-flex align-items-center justify-content-start">
+                                    <div class="d-flex align-items-center justify-content-between">
 
                                         @if(Auth::user())
-                                        <a href="{{ route('ads.edit',$ad->id)}}" 
-                                            class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-                                            @if(!$ad->deleted)
-                                            <span class="d-flex justify-content-end">
+                                            <span class="d-flex justify-content-around">
+                                                <a href="{{ route('ads.edit',$ad->id)}}" 
+                                                class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+                                                @if(!$ad->deleted)
+
                                                 @if (Auth::user()->id == $ad->user_id || Auth::user()->admin )
                                                 
                                                 <form action="{{ route('ads.destroy', $ad->id)}}" method="post">
@@ -96,16 +97,16 @@
                                                     <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                                 @endif
+
+                                                @else
+                                                <form action="{{ route('ads.destroy', $ad->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-success btn-sm" type="submit">restore</button>
+                                                </form>
+
+                                                @endif
                                             </span>
-                                            @else
-                                            <form action="{{ route('ads.destroy', $ad->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-success btn-sm" type="submit">restore</button>
-                                            </form>
-
-                                            @endif
-
 
 
 
@@ -118,7 +119,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $ads->onEachSide(1)->links() }}
+                        {{ $ads->appends(['type'=>'ads'])->links() }}
 
                         @else
                         <span class="badge badge-info">Not found</span>

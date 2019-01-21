@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/send/email', 'HomeController@mail')->name('email');
 
 Route::resource('/ads','AdController');
+
 Route::resource('/categories','CategoryController');
 Route::resource('/users','UserController');
 

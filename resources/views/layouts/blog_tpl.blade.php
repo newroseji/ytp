@@ -63,6 +63,8 @@
 
 </div><!-- /.container -->
 
+@yield('bs_modal')
+
 
 <footer class="footer">
   <div class="footer-container">
@@ -76,8 +78,8 @@
     <!-- Bootstrap core JavaScript
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
-      <script src="{{ asset('js/jquery.v321/jquery-slim.min.js') }}" ></script>
-      <script>window.jQuery || document.write('<script src="../../public/js/jquery.v321/jquery-slim.min.js"><\/script>')</script>
+      <script src="{{ asset('js/jquery1.12.4/jquery1.12.4.min.js') }}"></script>
+     
       <script src="{{ asset('js/popper.min.js') }}"></script>
       <script src="{{ asset('js/bootstrap.v4/bootstrap.min.js') }}"></script>
       <script src="{{ asset('js/holder.min.js') }}"></script>

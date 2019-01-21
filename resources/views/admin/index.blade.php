@@ -59,16 +59,17 @@
                                 <tr class="{{ $cat->deleted ? 'table-danger' : '' }}">
                                     <td>{{$cat->name}}</td>
                                     <td>{{$cat->description}}</td>
-                                    <td>{{$cat->created_at}}</td>
                                     <td>
+                                        <span class="d-flex justify-content-between">
+                                            <span>{{$cat->created_at}}</span>
 
-                                        <span  class="d-flex justify-content-around h-25">
+
 
                                             @if(Auth::user() )
 
                                             @if (Auth::user()->id == $cat->user_id || Auth::user()->admin )
 
-                                            <span class="d-flex justify-content-end">
+                                            <span class="d-flex justify-content-around h-25">
                                                 <a href="{{ route('categories.edit',$cat->id) }}" 
                                                     class="btn btn-primary btn-sm">edit</a>&nbsp;
 
@@ -182,8 +183,9 @@
 
                                         <td><span class="{{Carbon\Carbon::now()->format('m/d/y h:i:s')>$ad->expires ? 'text-danger' : '' }}">{{$ad->expires}}</span></td>
                                         <td>
-                                            <div class="d-flex justify-content-start">
-                                                <a href="{{ route('users.show',$ad->user_id)}}">{{$ad->user->firstname . " " . $ad->user->middlename . " " . $ad->user->lastname}}</a>&nbsp;
+                                            <div class="d-flex justify-content-between">
+                                                <span>
+                                                <a href="{{ route('users.show',$ad->user_id)}}">{{$ad->user->firstname . " " . $ad->user->middlename . " " . $ad->user->lastname}}</a></span>&nbsp;
 
                                                 <span  class="d-flex justify-content-around h-25">
 
@@ -228,7 +230,8 @@
                                     </tbody>
                                 </table>
 
-                                {{ $ads->onEachSide(1)->links() }}
+                                
+                                {{ $ads->appends(['type'=>'ads'])->links() }}
 
 
 
