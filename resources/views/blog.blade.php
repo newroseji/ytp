@@ -3,9 +3,9 @@
 @section('jumbotron')
       <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
-          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+          <h1 class="display-4 font-italic">Come, let's sell stuff</h1>
+          <p class="lead my-3">You might sometimes wonder how cool it would be if I can sell stuff that I do not want anymore but is in my posession for long! Or, you want to buy something that would be cheaper than the original price. Well, you have come to the right place.</p>
+          <p class="lead mb-0"><a href="/about" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
       </div>
 @endsection('jumbotron')
@@ -14,17 +14,22 @@
       <div class="row mb-2">
         <div class="col-md-6">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">
+
             <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-primary">World</strong>
+
+              <strong class="d-inline-block mb-2 text-primary"><a href="{{ route('ads.index')}}">Ads</a></strong>
+
               <h3 class="mb-0">
-                <a class="text-dark" href="#">Featured post</a>
+                <a class="text-dark" href="{{ route('ads.show', $feature_ad->id)}}">{{ str_limit($feature_ad->title,20) }}</a>
               </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
+              <div class="mb-1 text-muted">{{ $feature_ad->created_at->format('M d') }}</div>
+              <p class="card-text mb-auto">{{ str_limit($feature_ad->description,110) }}</p>
+              <a href="{{ route('ads.show', $feature_ad->id)}}">Continue reading</a>
             </div>
             <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+
           </div>
+
         </div>
         <div class="col-md-6">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">

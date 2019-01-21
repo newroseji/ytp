@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Ad;
 use App\Menu;
 use App\Category;
 use Illuminate\Support\Facades\View;
@@ -25,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
 
         $ad_categories = Category::where('deleted',0)->get();
         $view->with('ad_categories',$ad_categories); 
+
+
+        $feature_ad = Ad::where('deleted',0)->orderBy('created_at','desc')->first();
+        $view->with('feature_ad',$feature_ad);
 
        
         });
