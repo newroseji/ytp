@@ -16,7 +16,7 @@ class AdsTest extends TestCase
 	/** @test */
 	public function guest_may_not_create_ad(){
 
-		$this->post('ads')->assertRedirect('/');
+		$this->post('ads')->assertRedirect('/login');
 	}
 
 	

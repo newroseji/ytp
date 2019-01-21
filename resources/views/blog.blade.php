@@ -22,7 +22,7 @@
               <h3 class="mb-0">
                 <a class="text-dark" href="{{ route('ads.show', $feature_ad->id)}}">{{ str_limit($feature_ad->title,20) }}</a>
               </h3>
-              <div class="mb-1 text-muted">{{ $feature_ad->created_at->format('M d') }}</div>
+              <div class="mb-1 text-muted" title="Published on">{{ $feature_ad->created_at->format('M d') }}</div>
               <p class="card-text mb-auto">{{ str_limit($feature_ad->description,110) }}</p>
               <a href="{{ route('ads.show', $feature_ad->id)}}">Continue reading</a>
             </div>
