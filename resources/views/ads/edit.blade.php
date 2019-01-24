@@ -25,6 +25,7 @@
                     @endif
  
                     <form action="{{ route('ads.update', $ad->id) }}" 
+                        enctype="multipart/form-data" 
                     class="col-md-8 col-md-offset-2"
                     method="POST"  role="form">
                     @method('PATCH')
@@ -124,15 +125,35 @@
 
                         </div>
 
+                        <div class="form-group">
+                                
+                                <label for="pictures">Upload pictures</label>
+                                <input id="pictures" multiple="multiple" name="image[]" type="file">
+                                
+
+                            </div>
+
 
                         <div class="form-group">
                         <input type="submit" class="form-control btn btn-primary btn-lg" 
                         value="Submit">
                         </div>
 
+
+
                         
                     
                     </form>    
+
+                    @if (count($errors) > 0)
+                        <div class="error">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                 </div>
 

@@ -19,7 +19,41 @@ class AdsTest extends TestCase
 		$this->post('ads')->assertRedirect('/login');
 	}
 
-	
+	/** @test */
+	public function user_can_delete_ad(){
+
+		$this->withoutExceptionHandling();
+
+		// Create new User
+		$this->actingAs(factory('App\User')->create());
+
+		$attributes=[
+			'title'=>'Foo',
+			'description'=>'Bar',
+
+			'price'=>mt_rand(1000, 9999)/ 10,
+			'user_id'=>1,
+			'category_id'=>mt_rand(1,10),
+			'publish'=> Carbon::now(),
+			'expires'=>Carbon::now()->addDay(),
+		];
+
+		// Insert into db
+		$this->post('ads',$attributes);
+
+		// Get first Ad and update
+		$ad = \App\Ad::first();
+
+		$attributes=['id'=>$ad->id];
+
+		$this->delete('ads',$attributes);
+
+		// Now, assert
+		$this->assertDatabaseHas('ads',[
+			'deleted'=>1
+		]);
+
+	}
 
 	/** @test */
 	public function user_can_create_ad(){
@@ -35,7 +69,7 @@ class AdsTest extends TestCase
 			'price'=>mt_rand(1000, 9999)/ 10,
 			'user_id'=>2, /* 2 because user_id after update changes to 2 for some reason */
 			'category_id'=>mt_rand(1,10),
-		
+
 			
 			'expires'=>Carbon::now()->addDay()->format('Y-m-d H:i:s'),
 			'publish'=> Carbon::now()->format('Y-m-d H:i:s'),
@@ -52,7 +86,7 @@ class AdsTest extends TestCase
 	/** @test */
 	public function user_can_update_ad(){
 		$this->withoutExceptionHandling();
-		
+
 		// Create new User
 		$this->actingAs(factory('App\User')->create());
 
@@ -86,5 +120,7 @@ class AdsTest extends TestCase
 
 		]);
 	}
+
+
 
 }

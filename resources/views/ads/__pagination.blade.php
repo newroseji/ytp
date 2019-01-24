@@ -17,7 +17,16 @@
                         @foreach($ads as $ad)
                         <tr class="{{ Auth::user() && Auth::user()->id == $ad->user_id  ? 'table-success' : '' }}">
 
-                            <td><a href="{{ route('ads.show',$ad->id) }}">{{ $ad->title }}</a></td>
+                            <td><a href="{{ route('ads.show',$ad->id) }}">{{ $ad->title }}</a>
+                                @if($ad->advisits()->count()>0)
+                                <span class="text-sm badge badge-pill badge-info" title="Visits">{{ $ad->advisits()->count() }}</span>
+                                @endif
+
+                                @if($ad->photos()->count())
+                                    <i class="fa fa-file-image-o" title="{{$ad->photos()->count()}} images"></i>
+
+                                @endif
+                            </td>
                             <td><a href="{{ route('categories.show',$ad->category_id)}}" class="badge badge-pill badge-info">{{ $ad->category->name }}</a></td>
                             <td>{{ $ad->price ? 'Rs. ' . number_format($ad->price, 2) : '' }}</td>
                             <td>{{ $ad->expires  }}</td>

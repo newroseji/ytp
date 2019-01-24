@@ -85,6 +85,21 @@
     </div>
 
 
+    <div class="row">
+
+        <div class="form-group">
+            <form action="/upload" enctype="multipart/form-data" method="post">
+                {{ csrf_field() }} 
+                <label for="pictures">Upload pictures</label>
+                <input id="pictures" multiple="multiple" name="photos[]" type="file">
+            </form>
+
+        </div>
+
+
+    </div>
+
+
     
 
     <div class="d-block">

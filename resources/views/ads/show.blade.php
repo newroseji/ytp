@@ -21,6 +21,7 @@
                         <hr class="pb-0 mb-1">
                         <p class="pb-0 mb-0"><i class="fa fa-calendar"></i> Published on {{ $ad->publish }}
                             <br/><i class="fa fa-calendar"></i> Expires at {{ $ad->expires }}
+                            <span class="text-sm" title="Visits">{{ $ad->advisits()->count()>0 ? 'Visits ' . $ad->advisits()->count()  : '' }}</span>
 
                             @if (Auth::user() && Auth::user()->id == $ad->user_id)
 
@@ -41,7 +42,8 @@
                             @endif
                         </p>
                         <p class="pb-0 mb-0"><i class="fa fa-tags"></i> Category: <a href="{{ route('categories.show',$ad->category_id)}}" class="badge badge-info">
-                            {{ $ad->category->name }}</a>
+                            {{ $ad->category->name }}</a>&nbsp;
+                            <span class="text-sm" title="Visits"><i class="fa fa-paw"></i> Visits: <span class="badge badge-info">{{ $ad->advisits()->count() }}</span></span>
 
                         </p>
 
@@ -53,9 +55,24 @@
 
                 <div class="card-body">
 
+                    
+
+                    @if($ad->photos())
+
+                        @foreach($ad->photos as $photo)
+
+                        <img src="{{ asset('storage/') . $photo->thumbnail }}" 
+                        class="rounded float-right pl-2" 
+                        alt="{{ $photo->thumbnail}}">
 
 
-                                <p><img data-src="holder.js/200x250?theme=thumb"  class="rounded float-right pl-2" alt="...">{!! $ad->description !!}</p>
+
+
+                        @endforeach
+                    @endif
+
+
+                                <p>{!! $ad->description !!}</p>
 
 
                 </div>

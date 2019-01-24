@@ -23,6 +23,14 @@ class Ad extends Model
         return $this->belongsTo('App\Category');
     }
 
+    public function advisits(){
+        return $this->hasMany('App\Advisit');
+    }
+
+    public function photos(){
+        return $this->hasMany('App\AdsPhoto');
+    }
+
     public function getExpiresAttribute($value)
     {
         $date = Carbon::parse($value);
